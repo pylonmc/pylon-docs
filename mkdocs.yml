@@ -1,0 +1,18 @@
+site_name: Pylon Docs
+site_description: Documentation for the Minecraft Pylon plugin
+site_author: PylonMC
+repo_url: https://github.com/pylonmc/pylon-docs
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+
+nav:
+  - Introduction: index.md
+  - Installation: installation.md
+  - Configuration: configuration.md
+  - Contributing to core:
+    - Getting started: pylon-core/getting-started.md
+  - Contributing to docs:
+    - Getting started: pylon-docs/getting-started.md
