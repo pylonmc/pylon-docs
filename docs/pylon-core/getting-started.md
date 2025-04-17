@@ -6,8 +6,8 @@ We use a master pylon repository that contains both `pylon-core` and `pylon-base
 Pylon core has a set of integration tests. Tests should only be added for critical functionality such as block storage and recipes.
 
 ## Local development
-- Clone the `pylon` repository: `git clone https://github.com/pylonmc/pylon-docs`
+- Clone the `pylon` repository: `git clone https://github.com/pylonmc/pylon`
 - Run `./gradlew`. This will clone the `pylon-core` and `pylon-base` repositories.
 - To run the tests, use `./gradlew runLiveTests`
-- To run a server with `pylon-core` and `pylon-base`, use `./gradlew runLiveTests`
+- To run a server with `pylon-core` and `pylon-base`, use `./gradlew runSnapshotServer`
 
