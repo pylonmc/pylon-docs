@@ -14,7 +14,7 @@ We use [MkDocs](https://www.mkdocs.org/) and [Github pages](https://pages.github
 Only core members can deploy the website.
 
 1. Clone the `pylonmc.github.io` repository: `git clone https://github.com/pylonmc/pylonmc.github.io`
-2. Deploy the site with `mkdocs gh-deploy --config-file ../pylon-docs/mkdocs.yml --remote-branch master`
+2. Deploy the site by running **in the pylonmc.github.io repository** `mkdocs gh-deploy --config-file ../pylon-docs/mkdocs.yml --remote-branch master`
 
 [comment]: <> (TODO add more detailed explanation like Slimefun has (https://github.com/Slimefun/Slimefun4/wiki/Expanding-the-Wiki))
 
