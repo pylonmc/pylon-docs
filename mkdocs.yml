@@ -9,10 +9,13 @@ theme:
     scheme: slate
 
 nav:
-  - Introduction: index.md
-  - Installation: installation.md
-  - Configuration: configuration.md
-  - Contributing to core:
-    - Getting started: pylon-core/getting-started.md
-  - Contributing to docs:
-    - Getting started: pylon-docs/getting-started.md
+  - What is Pylon?: index.md
+  - Installation:
+    - Installing Pylon: installation/installing-pylon.md
+    - List of addons: installation/list-of-addons.md
+    - Commands & permissions: installation/commands-and-permissions.md
+  - Creating addons:
+    - Prerequisites: creating-addons/prerequisites.md
+  - Contributing:
+    - Getting started: contributing/getting-started.md
+    - Contributing to docs: contributing/contributing-to-docs.md
