@@ -2,7 +2,6 @@ site_name: Pylon Docs
 site_description: Documentation for the Minecraft Pylon plugin
 site_author: PylonMC
 repo_url: https://github.com/pylonmc/pylon-docs
-site_favicon: img/favicon.ico
 
 theme:
   name: material
@@ -18,7 +17,7 @@ nav:
     - List of addons: installation/list-of-addons.md
     - Commands & permissions: installation/commands-and-permissions.md
   - Creating addons:
-    - Prerequisites: creating-addons/prerequisites.md
+    - Getting started: creating-addons/getting-started.md
   - Contributing:
     - Getting started: contributing/getting-started.md
     - Contributing to docs: contributing/contributing-to-docs.md
