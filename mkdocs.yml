@@ -2,9 +2,12 @@ site_name: Pylon Docs
 site_description: Documentation for the Minecraft Pylon plugin
 site_author: PylonMC
 repo_url: https://github.com/pylonmc/pylon-docs
+site_favicon: img/favicon.ico
 
 theme:
   name: material
+  logo: img/favicon.png
+  favicon: img/favicon.png
   palette:
     scheme: slate
 
