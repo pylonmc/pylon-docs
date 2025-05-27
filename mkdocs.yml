@@ -10,6 +10,9 @@ theme:
   palette:
     scheme: slate
 
+extra_css:
+  - style.css
+
 nav:
   - What is Pylon?: index.md
   - Installation:
