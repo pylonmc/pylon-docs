@@ -24,3 +24,10 @@ nav:
   - Contributing:
     - Getting started: contributing/getting-started.md
     - Contributing to docs: contributing/contributing-to-docs.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      linenums: true
+      guess_lang: false
+  - pymdownx.superfences
