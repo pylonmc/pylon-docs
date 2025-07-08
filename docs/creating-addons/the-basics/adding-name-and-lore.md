@@ -51,7 +51,7 @@ Create a 'resources' folder under 'main', and then a 'lang' folder under that, a
 
 <details>
     <summary>Adding translations for other languages</summary>
-    If we wanted to create a Spanish language file, we would call it 'es' - or 'cs' for czech, and so on. <a href="https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes">See this Wikipedia page for a full list of these 2-letter codes.</a>
+    If we wanted to create a Spanish language file, we would call it 'es.yml' - or 'cs.yml' for Czech, and so on. <a href="https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes">See this Wikipedia page for a full list of these 2-letter codes.</a>
 </details>
 
 Next, add this inside the file:
@@ -74,6 +74,10 @@ NamespacedKey epicSwordKey = new NamespacedKey(this, "epic_sword");
 ```
 
 <details>
-    <summary>What's all this &lt;arrow&gt; and &lt;red&gt; and &lt;/red&gt; business?&lt;summary&gt;
+    <summary>What's all this &lt;arrow&gt; and &lt;red&gt; and &lt;/red&gt; business?&lt;summary&gt;</summary>
     We'll go into this more later, but Pylon uses <a href="https://docs.advntr.dev/minimessage/index.html">MiniMessage</a> formatting. Pylon also has its own custom tags - &lt;arrow&gt; is an example of this. (TODO add links to language page)
 </details>
+
+Start up the server again. Your sword should now have name and lore!
+![Epic sword with translations](/img/epic-sword.png)
+

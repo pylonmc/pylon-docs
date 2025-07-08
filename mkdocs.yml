@@ -20,10 +20,13 @@ nav:
     - List of addons: installation/list-of-addons.md
     - Commands & permissions: installation/commands-and-permissions.md
   - Creating addons:
-    - Getting started: creating-addons/the-basics/getting-started.md
-    - Your first item: creating-addons/the-basics/your-first-item.md
-    - Running your addon: creating-addons/the-basics/running-your-addon.md
-    - Adding name & lore: creating-addons/the-basics/adding-name-and-lore.md
+    - "Tutorial 1: Your first item":
+      - Getting started: creating-addons/the-basics/getting-started.md
+      - Your first item: creating-addons/the-basics/your-first-item.md
+      - Running your addon: creating-addons/the-basics/running-your-addon.md
+      - Adding name & lore: creating-addons/the-basics/adding-name-and-lore.md
+      - Wrapping up: creating-addons/the-basics/wrapping-up.md
+    - "Tutorial 2: Custom item classes": []
   - Contributing:
     - Getting started: contributing/getting-started.md
     - Contributing to docs: contributing/contributing-to-docs.md
