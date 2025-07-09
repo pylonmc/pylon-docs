@@ -20,12 +20,12 @@ nav:
     - List of addons: installation/list-of-addons.md
     - Commands & permissions: installation/commands-and-permissions.md
   - Creating addons:
+    - "Tutorial 0: Getting started": creating-addons/tutorial-0.md
     - "Tutorial 1: Your first item":
-      - Getting started: creating-addons/the-basics/getting-started.md
-      - Your first item: creating-addons/the-basics/your-first-item.md
-      - Running your addon: creating-addons/the-basics/running-your-addon.md
-      - Adding name & lore: creating-addons/the-basics/adding-name-and-lore.md
-      - Wrapping up: creating-addons/the-basics/wrapping-up.md
+      - Adding an item: creating-addons/tutorial-1/adding-an-item.md
+      - Running your addon: creating-addons/tutorial-1/running-your-addon.md
+      - Adding name & lore: creating-addons/tutorial-1/adding-name-and-lore.md
+      - Wrapping up: creating-addons/tutorial-1/wrapping-up.md
     - "Tutorial 2: Custom item classes": []
   - Contributing:
     - Getting started: contributing/getting-started.md
@@ -38,3 +38,5 @@ markdown_extensions:
       linenums: true
       guess_lang: false
   - pymdownx.superfences
+  - pymdownx.details
+  - admonition

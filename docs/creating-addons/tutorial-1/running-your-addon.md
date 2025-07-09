@@ -8,7 +8,10 @@ The addon template comes with a 'run server' task which you can use to run a tes
 
 You should see a console pop up with the server output. It'll take a minute or two to download the server executable. It'll fail to start on first run because you'll need to accept the EULA. Go into the `run` folder that was just created and accept the EULA in `eula.txt`, then run the `runServer` task again.
 
-To shut down your server, type `stop` in the console or use `/stop` ingame. **Do not stop the task using the stop button in IntelliJ, because this will not shut down the server.**
+To shut down your server, type `stop` in the console or use `/stop` ingame. 
+
+!!! danger 
+    Do not stop the task using the stop button in IntelliJ, because this will not shut down the server. You will then probably be unable to kill the server. The server will become immortal. All of reality will be consumed. N̴o̶t̵h̶i̴n̴g̸ ̵a̶n̵d̷ ̸n̷o̷ ̴o̶n̸e̸ ̸i̷s̵ ̶s̸a̴f̴e̷.̵ Y̶̲̏O̵̫͘Ư̸͓ ̸̪̀S̸͚͊H̷̭̓A̵̢̾L̷̘͋L̷̻̿ ̴̾͜A̸̤̿L̸͇̾L̷̟̕ ̸̫̈B̴̊ͅÈ̴̹ ̴̺̉D̸̰̓Ë̵̪S̷̪̚Ṭ̸͒R̴̹̓Ǫ̵̓Ȳ̴̥Ê̶͙D̶̰̑ ̵͉͘B̷̘̌Y̴̽ͅ ̴̙̈T̷͚͒H̷̤͂Ẽ̷̥ ̸̨͗Ą̵̾L̴̦̒M̵̗͠I̵̱͛G̸͈͝H̷̫̀T̶̰̋Y̸͎̚ ̵̦̈́J̸̣̑V̴̭̌M̸̗̋. 
 
 Once the server has started, you can connect on `localhost:25565`. Make sure you give yourself admin permissions by typing `op <username>` in the console.
 

@@ -1,4 +1,4 @@
-# Your first item
+# Adding an item
 
 ## Overview
 
@@ -16,10 +16,8 @@ To create a simple item, we only need two things: a **key** for the item, and an
 
 NamespacedKeys are how Pylon identifies custom items, blocks, researches, entities, and more.
 
-<details>
-    <summary>What are NamespaceKeys and why are we using them?</summary>
+??? question "What are NamespaceKeys and why are we using them?"
     A key is just a simple piece of text, like `pylonbase:copper_dust`, which allows Pylon to uniquely identify your item. This is very similar to how vanilla Minecraft items have IDs. Why don't we just use `copper_dust` as the key? Well, what if two addons add an item called `copper_dust`? We won't be able to tell which one is which! To fix this, Pylon uses `NamespacedKey`s, which just means we take a string *and* your addon's name, and put them together - for example, `my_addon:copper_dust`.
-</details>
 
 To create a new NamespacedKey called 'epic_sword', we can do the following (inside `onEnable`):
 ```java
@@ -34,13 +32,11 @@ The second thing we need is an actual item. We'll use `ItemStackBuilder` for thi
 
 **Whenever you're creating a Pylon item, make sure you use `ItemStackBuilder.pylonItem(<material>, <key>)`.**
 
-<details>
-    <summary>Why use `ItemStackBuilder.pylonItem`, and not any of the other ways to create an ItemStack?</summary>
+??? question "Why use `ItemStackBuilder.pylonItem`, and not any of the other ways to create an ItemStack?"
 
     There are others ways to create ItemStacks, but **do not** use these to create Pylon items. Under the hood, Pylon stores item keys in PersistentDataContainers, or PDCs (we'll cover them later in the tutorial - if you don't know what a PDC is, for now just imagine it as a simple way to store data inside an in-game item). When you call ItemStackBuilder.pylonItem and supply a key, that key is written to the item's PersistentDataContainer automatically. If you supply your own item stack, its PDC won't contain the item's key, and Pylon won't be able to differentiate that item with a regular Minecraft item.
 
     `ItemStackBuilder` also sets the name and lore of the item to the default translation keys (which will be explained later in this tutorial).
-</details>
 
 To create an unbreakable diamond sword, you can do as follows:
 ```Java

@@ -43,5 +43,5 @@ The template is as minimal as possible and contains no fluff. It's built with [g
 
 What you *do* need to worry about is `build.gradle.kts` and `gradle.properties` These two files contain the top-level information about your project - name, version, Pylon core version, main class, and group. Make sure you change these accordingly. If you're confused about the 'main class' and 'group', [this might help.](https://www.baeldung.com/java-packages)
 
-Finally, we've got `AddonTemplate.java`. This is the important bit! Open it up, and we'll continue from there in the next section.
+Finally, we've got `AddonTemplate.java`. This is the important bit! Open it up, and we'll continue from there in the next tutorial.
 
