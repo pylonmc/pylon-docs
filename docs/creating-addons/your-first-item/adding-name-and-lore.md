@@ -77,3 +77,4 @@ NamespacedKey epicSwordKey = new NamespacedKey(this, "epic_sword");
 Start up the server again. Your sword should now have name and lore!
 ![Epic sword with translations](/img/epic-sword.png)
 
+(TODO why the hell does this image not have the lore?)
