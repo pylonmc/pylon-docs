@@ -1,5 +1,8 @@
 # Getting started
 
+!!! danger 
+    Pylon addon development is not supported currently. Pylon is changing rapidly, and your addon may break in horrific ways when the next Pylon version is released. You can still make addons, but beware that you may have to make substantial changes to keep them up to date.
+
 ## Foreword
 
 So, you want to write a Pylon addon? Good for you! We've written this comprehensive guide to try and make it as easy as possible. Don't be too intimidated by the wall of text - we'll explain all you need to know as we go along, and you can go as slow as you need to! That said, some basic technical and programming knowledge is required - if you've never used an IDE or a compiler, or never a for loop, you might have a hard time following.

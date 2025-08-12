@@ -1,5 +1,8 @@
 # Installation
 
+!!! danger
+    PYLON IS CURRENTLY EXPERIMENTAL. ONLY RUN IT ON A TEST SERVER THAT YOU ARE WILLING TO DELETE. THE NEXT PYLON VERSION WILL PROBABLY NOT BE COMPATIBLE WITH THE PREVIOUS ONE. IF YOU INSTALL PYLON SOMEWHERE YOU SHOULDN'T AND END UP LOSING DATA, WE WILL POINT AND LAUGH AT YOU.
+
 1. Make sure you are running Paper or a Paper fork. Pylon is not compatible with Spigot.
 2. Download the latest version of Pylon Core from [here](https://github.com/pylonmc/pylon-core/releases)
 3. Download the latest version of Pylon Base from [here](https://github.com/pylonmc/pylon-base)
