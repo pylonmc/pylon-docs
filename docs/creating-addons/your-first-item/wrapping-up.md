@@ -4,23 +4,23 @@
 
 There's been a lot to go through, but when you look at the code we needed, it's actually really not too much:
 
-```java title='YourAddonName.java'
-NamespacedKey epicSwordKey = new NamespacedKey(this, "epic_sword");
-ItemStack epicSword = ItemStackBuilder.pylonItem(Material.DIAMOND_SWORD, epicSwordKey)
-        .set(DataComponentTypes.UNBREAKABLE, Unbreakable.unbreakable())
-        .build();
-PylonItem.register(PylonItem.class, epicSword);
+```java title='MyAddon.java'
+NamespacedKey baguetteKey = new NamespacedKey(this, "baguette");
+ItemStack baguette = ItemStackBuilder.pylonItem(Material.BREAD, baguetteKey)
+    .set(DataComponentTypes.FOOD, FoodProperties.food().nutrition(6))
+    .build();
+PylonItem.register(PylonItem.class, baguette);
+BasePages.FOOD.addItem(baguetteKey);
 ```
 
 ```yml title='en.yml'
 addon: "<your addon name here>"
 
+addon: My Addon
 item:
-  epic_sword:
-    name: "Epic Sword"
-    lore: |-
-      <arrow> This is an <red>epic</red> sword
-      <arrow> Very epic
+  baguette:
+    name: Baguette
+    lore: <arrow> <blue>The <white>best <dark_red>food
 ```
 
 ---
@@ -28,9 +28,9 @@ item:
 ## Practice tasks
 
 - Add another item with the same key. What happens?
-- Allow your sword to have a stack size greater than 1. **Hint:** Use `DataComponentTypes.MAX_STACK_SIZE`
-- Add an epic pickaxe with a different name and lore
-- Add a bow that has only 10 durability, and starts with only 5 left. **Hint:** `DataComponentTypes.DAMAGE` and `DataComonentTypes.MAX_DAMAGE` probably don't do what you'd think they do from the name...
+- Make your baguette's max stack size 32. **Hint:** Use `DataComponentTypes.MAX_STACK_SIZE`
+- Add a croissant with a different name and lore
+- Add a bow that has only 10 durability, and starts with only 5 left. **Hint:** `DataComponentTypes.DAMAGE` and `DataComonentTypes.MAX_DAMAGE` are somewhat misleadingly named...
 
 ---
 

@@ -1,0 +1,14 @@
+- Use a material that represents the item
+- Description, then usage, then attributes
+- Keep lore concise; people hate reading
+- Describe what your item does, but not in so much detail that it's overbearing
+- Come back to item lore and adjust it over time if you happen to think of an improvement
+- Don't use colors excessively (avoid unecessary highlighting)
+- Recipes should make logical sense
+- Reflect recipes that can be reflected (eg: axes)
+- The smelting time for a new furnace / blast furnace / smoker recipe should be the same as the smelting time for all items in vanilla, unless there's a good reason to make it different
+- The material of a block should be the same as the material of the item
+- Don't include lore just for the sake of writing something
+- Ideally, it should be possible to figure out how to use the items from just the lore
+- Don't use full stops at the end of lines
+

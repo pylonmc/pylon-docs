@@ -14,7 +14,7 @@ item.setName("Nuclear Bomb")
 ```
 <small>(not real code - just for demonstration purposes)</small>
 
-Now, suppose we want Spanish speakers to be able to play our addon. Well, in Spanish, that's called 'Bomba Nuclear'. But I've hardcoded in 'Nuclear Bomb'... so how can we make sure that Spanish people see 'Bomba Nuclear' instead?
+Now, suppose we want Spanish speakers to be able to play our addon. Well, in Spanish, that's called 'Bomba Nuclear' according to google translate. But I've hardcoded in 'Nuclear Bomb'... so how can we make sure that Spanish people see 'Bomba Nuclear' instead?
 
 The solution to this is to just use a generic 'translation key'.
 ```java
@@ -37,17 +37,15 @@ item.nuclear-bomb.name: "Bomba Nuclear"
 ```
 <small>(not real code - just for demonstration purposes)</small>
 
-Obviously, we'll need some system to substitute in the right translation for the right people, but Pylon will handle that for you, so don't worry about it for now. Now, let's see how to do the same thing with Pylon.
+Obviously, we'll need some system to substitute in the right translation for the right people, but Pylon will handle that for you automatically. Now, let's see how to do the same thing with Pylon.
 
 ---
 
-## Adding name and lore to our epic sword
+## Adding name and lore to our baguette
 
-Remember how we did `item.setName("item.nuclear-bomb.name")` above? In Pylon, you don't need to do that because Pylon automatically generates the translation key based on your item's key. All we need to do is create translation files and make sure they contain the correct keys.
+Remember how we did `item.setName("item.nuclear-bomb.name")` above? In Pylon, you don't need to do that because Pylon **automatically generates the translation key** based on your item's key. All we need to do is create translation files and make sure they contain the correct keys.
 
-Create a 'resources' folder under 'main', and then a 'lang' folder under that, and finally an 'en.yml' file (for English). 
-
-![Creating the language file](/img/creating-the-language-file.png)
+Open the 'en.yml' file ('en' is a code for 'English') in the `src/main/resources/lang` folder.
 
 ??? Note "Adding translations for other languages"
     If we wanted to create a Spanish language file, we would call it 'es.yml' - or 'cs.yml' for Czech, and so on. See [this Wikipedia page](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for a full list of these 2-letter codes.
@@ -57,24 +55,22 @@ Next, add this inside the file:
 addon: "<your addon name here>"
 
 item:
-  epic_sword:
-    name: "Epic Sword"
+  baguette:
+    name: "Baguette"
     lore: |-
-      <arrow> This is an <red>epic</red> sword
-      <arrow> Very epic
+      <arrow> <dark_red>The <blue>best </red>food
 ```
 
 Note that we have an `addon` key. This is just the name of your addon.
 
-We've also added `name` and `lore` for our sword. Notice that we're using `epic_sword` here because that's the key that we created earlier:
+We've also added `name` and `lore` for our sword. Notice that we're using `baguette` here because that's the key that we created earlier, in this line:
 ```java
-NamespacedKey epicSwordKey = new NamespacedKey(this, "epic_sword");
+NamespacedKey baguetteKey = new NamespacedKey(this, "baguette");
 ```
 
 ??? question "What's all this &lt;arrow&gt; and &lt;red&gt; and &lt;/red&gt; business?"
     We'll go into this more later, but Pylon uses [MiniMessage](https://docs.advntr.dev/minimessage/index.html) formatting. Pylon also has its own custom tags - &lt;arrow&gt; is an example of this. (TODO add links to language page)
 
 Start up the server again. Your sword should now have name and lore!
-![Epic sword with translations](/img/epic-sword.png)
+![Baguette with translations](/img/baguette.png)
 
-(TODO why the hell does this image not have the lore?)
