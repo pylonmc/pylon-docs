@@ -72,5 +72,5 @@ NamespacedKey baguetteKey = new NamespacedKey(this, "baguette");
     We'll go into this more later, but Pylon uses [MiniMessage](https://docs.advntr.dev/minimessage/index.html) formatting. Pylon also has its own custom tags - &lt;arrow&gt; is an example of this. (TODO add links to language page)
 
 Start up the server again. Your sword should now have name and lore!
-![Baguette with translations](/img/baguette.png)
+![Baguette with translations](img/baguette.png)
 

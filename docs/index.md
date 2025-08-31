@@ -10,18 +10,18 @@ Pylon uses an addon system, meaning anyone can add content to Pylon by writing a
 
 ## :frame_photo: Pylon in pictures (so far)
 
-![A Pylon fluid setup](/img/fluid-setup.png)
-![Hovering over research pack in Pylon guide](/img/hovering-over-research-pack.png)
-![Hydraulic fluid setup](/img/hydraulic-fluid-setup.png)
-![Copper fluid tank](/img/looking-at-copper-fluid-tank.png)
-![Pylon research in the guide](/img/looking-at-research.png)
-![Medkit in guide](/img/medkit.png)
-![Placing copper pipes](/img/placing-pipes.png)
-![Purification tower config](/img/purification-tower-config.png)
-![Searching items in the Pylon guide](/img/searching-items.png)
-![Using the hydraulic grindstone turner](/img/using-grindstone-turner.png)
-![Using the magic altar](/img/using-magic-altar.png)
-![Using the smeltery](/img/using-smeltery.png)
+![A Pylon fluid setup](img/fluid-setup.png)
+![Hovering over research pack in Pylon guide](img/hovering-over-research-pack.png)
+![Hydraulic fluid setup](img/hydraulic-fluid-setup.png)
+![Copper fluid tank](img/looking-at-copper-fluid-tank.png)
+![Pylon research in the guide](img/looking-at-research.png)
+![Medkit in guide](img/medkit.png)
+![Placing copper pipes](img/placing-pipes.png)
+![Purification tower config](img/purification-tower-config.png)
+![Searching items in the Pylon guide](img/searching-items.png)
+![Using the hydraulic grindstone turner](img/using-grindstone-turner.png)
+![Using the magic altar](img/using-magic-altar.png)
+![Using the smeltery](img/using-smeltery.png)
 
 ## :stopwatch: Performance & stability
 

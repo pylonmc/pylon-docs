@@ -38,7 +38,7 @@ Next, open your fork in Intellij.
 
 It might take a few minutes for Intellij to import the project.
 
-![Intellij importing the addon template](/img/importing-addon-template.png)
+![Intellij importing the addon template](img/importing-addon-template.png)
 
 ### What's in the template?
 
