@@ -45,6 +45,88 @@ baguette_flamethrower:
 
 ## Baguette of Wisdom
 
+```java title="MyAddon.java"
+NamespacedKey baguetteOfWisdomKey = new NamespacedKey(this, "baguette_of_wisdom");
+ItemStack baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
+        .editPdc(pdc -> pdc.set(
+                BaguetteOfWisdom.STORED_XP_KEY,
+                PylonSerializers.INTEGER,
+                0
+        ))
+        .build();
+PylonItem.register(BaguetteOfWisdom.class, baguetteOfWisdom);
+BasePages.FOOD.addItem(baguetteOfWisdomKey);
 ```
 
+```java title="BaguetteOfWisdom.java"
+public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
+    public static final NamespacedKey STORED_XP_KEY = new NamespacedKey(MyAddon.getInstance(), "stored_xp");
+
+    private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
+
+    public BaguetteOfWisdom(@NotNull ItemStack stack) {
+        super(stack);
+    }
+
+    @Override
+    public @NotNull List<PylonArgument> getPlaceholders() {
+        return List.of(
+                PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity)),
+                PylonArgument.of("stored_xp", UnitFormat.EXPERIENCE.format(getStoredXp()))
+        );
+    }
+
+    @Override
+    public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
+        if (event.getPlayer().isSneaking()) {
+            int xp = getStoredXp();
+
+            // 2. Give all the XP to the player
+            event.getPlayer().giveExp(xp);
+
+            // 3. Set the stored XP to 0
+            setStoredXp(0);
+        } else {
+            // 1. Read how much XP we already have stored
+            int xp = getStoredXp();
+
+            // 2. Figure out how much XP we need to take to get to `xpCapacity`
+            int extraXpNeeded = xpCapacity - xp;
+
+            // 3. Take as much XP from the player as we can to get there
+            int xpToTake = Math.min(event.getPlayer().calculateTotalExperiencePoints(), extraXpNeeded);
+            event.getPlayer().giveExp(-xpToTake);
+
+            // 4. Set the new stored XP amount
+            setStoredXp(xp + xpToTake);
+        }
+    }
+
+    public void setStoredXp(int xp) {
+        getStack().editPersistentDataContainer(pdc -> pdc.set(
+                STORED_XP_KEY,
+                PylonSerializers.INTEGER,
+                xp
+        ));
+    }
+
+    public int getStoredXp() {
+        return getStack().getPersistentDataContainer().get(
+                STORED_XP_KEY,
+                PylonSerializers.INTEGER
+        );
+    }
+}
+```
+
+```yaml title="en.yml"
+item:
+  baguette_of_wisdom:
+    name: "Baguette of Wisdom"
+    lore: |-
+      <arrow> Use the power of baguettes to transfer XP
+      <arrow> <insn>Right click</insn> to charge with XP
+      <arrow> <insn>Shift right click</insn> to discharge stored XP
+      <arrow> <attr>XP capacity:</attr> %xp_capacity%
+      <arrow> <attr>Stored XP:</attr> %stored_xp%
 ```
