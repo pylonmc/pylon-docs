@@ -48,7 +48,7 @@ Remember how we did `item.setName("item.nuclear-bomb.name")` above? In Pylon, yo
 Open the 'en.yml' file ('en' is a code for 'English') in the `src/main/resources/lang` folder.
 
 !!! Note "Adding translations for other languages"
-    If we wanted to create a Spanish language file, we would call it 'es.yml' - or 'cs.yml' for Czech, and so on. See [this Wikipedia page](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for a full list of these 2-letter codes.
+    If we wanted to create a Spanish language file, we would call it 'es.yml' - or 'cs.yml' for Czech, and so on. See [this Wikipedia page](https://minecraft.wiki/w/Language) for a full list of these 2-letter codes.
 
 Next, add this inside the file:
 ```yaml title="en.yml" hl_lines="3-7"

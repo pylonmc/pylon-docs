@@ -133,7 +133,7 @@ public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityIn
     @Override
     public @NotNull List<PylonArgument> getPlaceholders() {
         return List.of(
-                PylonArgument.of("burn-time", UnitFormat.SECONDS.format(burnTimeTicks / 20.0))
+                PylonArgument.of("burn-time", burnTimeTicks / 20.0)
         );
     }
 }

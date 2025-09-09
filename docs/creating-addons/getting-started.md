@@ -39,17 +39,17 @@ Now let's get into it!
 
 Pylon has an [addon template](https://github.com/pylonmc/pylon-addon-template) you can use, which comes with everything you need to write a Pylon addon. [Create a fork of the template](https://www.geeksforgeeks.org/git/how-to-fork-a-github-repository/). Then, [clone your fork](https://www.geeksforgeeks.org/git/how-to-git-clone-a-remote-repository/).
 
-Next, open your fork in Intellij. 
+Next, open your fork in IntelliJ. 
 
-It might take a few minutes for Intellij to import the project.
+It might take a few minutes for IntelliJ to import the project.
 
-![Intellij importing the addon template](img/importing-addon-template.png)
+![IntelliJ importing the addon template](img/importing-addon-template.png)
 
 ### What's in the template?
 
-The template is as minimal as possible and contains no fluff. It's built with [gradle](https://gradle.org/). There are two files in the root of the directory - `gradlew` and `gradlew.bat` which are wrappers around gradle. If you're using Intellij, you won't need to worry about them. There's also `build.gradle.kts`, which you'll only need to worry about if you want to add dependencies or want to change the way the project is built.
+The template is as minimal as possible and contains no fluff. It's built with [Gradle](https://gradle.org/). There are two files in the root of the directory - `gradlew` and `gradlew.bat` which are wrappers around Gradle. If you're using IntelliJ, you won't need to worry about them. There's also `build.gradle.kts`, which you'll only need to worry about if you want to add dependencies or want to change the way the project is built.
 
-What you *do* need to worry about is `build.gradle.kts` and `gradle.properties` These two files contain the top-level information about your project - name, version, Pylon core version, main class, and group. Make sure you change these accordingly. If you're confused about the 'main class' and 'group', [this might help.](https://www.baeldung.com/java-packages)
+What you *do* need to worry about is `build.gradle.kts` and `gradle.properties`. These two files contain the top-level information about your project - name, version, Pylon core version, main class, and group. Make sure you change these accordingly. If you're confused about the 'main class' and 'group', [this might help.](https://www.baeldung.com/java-packages)
 
 Finally, we've got `MyAddon.java`. This is the important bit! Open it up, and we'll continue from there in the next tutorial.
 
