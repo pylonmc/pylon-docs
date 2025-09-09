@@ -23,7 +23,7 @@ But suppose we want to store the charge level of a portable battery. If we can't
 
 ## Persistent data containers (PDCs)
 
-!!! info "PDCs are added by Spigot/Paper, not Pylon. "
+!!! info "PDCs are added by Paper, not Pylon. "
     We are covering them here because they're used for essentially all persistent data storage (including for blocks and entities) in Pylon.
 
 [Persistent data container]s (PDCs) are a way to persistently store arbitrary data on an item. You can think of them as a similar sort of thing to YAML. You can 'set' keys and you can 'get' keys, and the keys can have different kinds of data - like strings, ints, or even other PDCs.
@@ -52,21 +52,37 @@ To do this, we're going to need to keep track of how much experience the baguett
 
 You know the drill from last time:
 
-```java title="MyAddon.java"
-NamespacedKey baguetteOfWisdomKey = new NamespacedKey(this, "baguette_of_wisdom");
-ItemStack baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
-        .build();
-PylonItem.register(BaguetteOfWisdom.class, baguetteOfWisdom);
-BasePages.FOOD.addItem(baguetteOfWisdomKey);
-```
+=== "Java"
+    ```java title="MyAddon.java"
+    NamespacedKey baguetteOfWisdomKey = new NamespacedKey(this, "baguette_of_wisdom");
+    ItemStack baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
+            .build();
+    PylonItem.register(BaguetteOfWisdom.class, baguetteOfWisdom);
+    BasePages.FOOD.addItem(baguetteOfWisdomKey);
+    ```
+=== "Kotlin"
+    ```kotlin title="MyAddon.kt"
+    val baguetteOfWisdomKey = NamespacedKey(this, "baguette_of_wisdom")
+    val baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
+        .build()
+    PylonItem.register<BaguetteOfWisdom>(baguetteOfWisdom)
+    BasePages.FOOD.addItem(baguetteOfWisdomKey)
+    ```
 
-```java title="BaguetteOfWisdom.java"
-public class BaguetteOfWisdom extends PylonItem {
-    public BaguetteOfWisdom(@NotNull ItemStack stack) {
-        super(stack);
+[](this invisible link is important to break up the two code tabs above and below, otherwise the tabs will all be on one line)
+
+=== "Java"
+    ```java title="BaguetteOfWisdom.java"
+    public class BaguetteOfWisdom extends PylonItem {
+        public BaguetteOfWisdom(@NotNull ItemStack stack) {
+            super(stack);
+        }
     }
-}
-```
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt"
+    class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack)
+    ```
 
 ```yaml title="en.yml"
 item:
@@ -80,15 +96,22 @@ item:
 
 Now, let's add a config value for the max XP capacity:
 
-```java title="BaguetteOfWisdom.java" hl_lines="2"
-public class BaguetteOfWisdom extends PylonItem {
-    private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
-
-    public BaguetteOfWisdom(@NotNull ItemStack stack) {
-        super(stack);
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="2"
+    public class BaguetteOfWisdom extends PylonItem {
+        private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
+    
+        public BaguetteOfWisdom(@NotNull ItemStack stack) {
+            super(stack);
+        }
     }
-}
-```
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="2"
+    class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack) {
+        private val xpCapacity: Int = settings.getOrThrow("xp-capacity", Int::class.java)
+    }
+    ```
 
 ```yaml title="baguette_of_wisdom.yml"
 xp-capacity: 200
@@ -112,23 +135,35 @@ item:
       <arrow> <attr>Stored XP:</attr> %stored_xp%
 ```
 
-```java title="BaguetteOfWisdom.java" hl_lines="8-14"
-public class BaguetteOfWisdom extends PylonItem {
-    private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
-
-    public BaguetteOfWisdom(@NotNull ItemStack stack) {
-        super(stack);
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="8-14"
+    public class BaguetteOfWisdom extends PylonItem {
+        private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
+    
+        public BaguetteOfWisdom(@NotNull ItemStack stack) {
+            super(stack);
+        }
+    
+        @Override
+        public @NotNull List<PylonArgument> getPlaceholders() {
+            return List.of(
+                    PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity))
+                    // TODO add stored_xp placeholder
+            );
+        }
     }
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="4-7"
+    class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack) {
+        private val xpCapacity: Int = settings.getOrThrow("xp-capacity", Int::class.java)
 
-    @Override
-    public @NotNull List<PylonArgument> getPlaceholders() {
-        return List.of(
-                PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity))
-                // TODO add stored_xp placeholder
-        );
+        override fun getPlaceholders() = listOf(
+            PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity))
+            // TODO add stored_xp placeholder
+        )
     }
-}
-```
+    ```
 
 All of this should be familiar from the [advanced lore] section.
 
@@ -138,51 +173,89 @@ Next, let's allow the player to charge by right clicking, and discharge by shift
 
 We can use the [PylonInteractor] class to do this:
 
-```java title="BaguetteOfWisdom.java" hl_lines="1 16-23"
-public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
-    private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
-
-    public BaguetteOfWisdom(@NotNull ItemStack stack) {
-        super(stack);
-    }
-
-    @Override
-    public @NotNull List<PylonArgument> getPlaceholders() {
-        return List.of(
-                PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity))
-                // TODO add stored_xp placeholder
-        );
-    }
-
-    @Override
-    public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
-        if (event.getPlayer().isSneaking()) {
-            // TODO discharge logic
-        } else {
-            // TODO charge logic
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="1 16-23"
+    public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
+        private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
+    
+        public BaguetteOfWisdom(@NotNull ItemStack stack) {
+            super(stack);
+        }
+    
+        @Override
+        public @NotNull List<PylonArgument> getPlaceholders() {
+            return List.of(
+                    PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity))
+                    // TODO add stored_xp placeholder
+            );
+        }
+    
+        @Override
+        public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
+            if (event.getPlayer().isSneaking()) {
+                // TODO discharge logic
+            } else {
+                // TODO charge logic
+            }
         }
     }
-}
-```
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="1 9-15"
+    
+    class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack), PylonInteractor {
+        private val xpCapacity: Int = settings.getOrThrow("xp-capacity", Int::class.java)
+
+        override fun getPlaceholders() = listOf(
+            PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity))
+            // TODO add stored_xp placeholder
+        )
+
+        override fun onUsedToRightClick(event: PlayerInteractEvent) {
+            if (event.player.isSneaking) {
+                // TODO discharge logic
+            } else {
+                // TODO charge logic
+            }
+        }
+    }
+    ```
 
 ### The charge logic
 
 Let's now do the **charge** logic. In order to charge a Baguette of Wisdom, we need to store its charge level. As mentioned beforehand, we can use the item's [persistent data container] to do this. To start with, let's just set the charge level to 50:
 
-```java title="BaguetteOfWisdom.java" hl_lines="6-10"
-@Override
-public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
-    if (event.getPlayer().isSneaking()) {
-        // TODO discharge logic
-    } else {
-        getStack().editPersistentDataContainer(pdc -> pdc.set(
-                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
-                PylonSerializers.INTEGER,
-                50
-        ));
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="6-10"
+    @Override
+    public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
+        if (event.getPlayer().isSneaking()) {
+            // TODO discharge logic
+        } else {
+            getStack().editPersistentDataContainer(pdc -> pdc.set(
+                    new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                    PylonSerializers.INTEGER,
+                    50
+            ));
+        }
     }
-}
-```
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="5-11"
+    override fun onUsedToRightClick(event: PlayerInteractEvent) {
+        if (event.player.isSneaking) {
+            // TODO discharge logic
+        } else {
+            stack.editPersistentDataContainer { pdc ->
+                pdc.set(
+                    NamespacedKey(MyAddon.instance, "stored_xp"),
+                    PylonSerializers.INTEGER,
+                    50
+                )
+            }
+        }
+    }
+    ```
 
 As you can see, we need to provide three things to set a PDC value: the **key**, the **serializer**, and the **value**. 
 
@@ -197,82 +270,153 @@ Ok. But what we really need to do is 'top up' the stored xp using the player's e
 3. Take as much XP from the player as we can to get there
 4. Set the new XP amount
 
-```java title="BaguetteOfWisdom.java" hl_lines="6-24"
-@Override
-public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
-    if (event.getPlayer().isSneaking()) {
-        // TODO discharge logic
-    } else {
-        // 1. Read how much XP we already have stored
-        int xp = getStack().getPersistentDataContainer().get(
-                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
-                PylonSerializers.INTEGER
-        );
-        
-        // 2. Figure out how much XP we need to take to get to `xpCapacity`
-        int extraXpNeeded = xpCapacity - xp;
-
-        // 3. Take as much XP from the player as we can to get there
-        int xpToTake = Math.min(event.getPlayer().calculateTotalExperiencePoints(), extraXpNeeded);
-        event.getPlayer().giveExp(-xpToTake);
-
-        // 4. Set the new stored XP amount
-        getStack().editPersistentDataContainer(pdc -> pdc.set(
-                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
-                PylonSerializers.INTEGER,
-                xp + xpToTake
-        ));
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="6-24"
+    @Override
+    public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
+        if (event.getPlayer().isSneaking()) {
+            // TODO discharge logic
+        } else {
+            // 1. Read how much XP we already have stored
+            int xp = getStack().getPersistentDataContainer().get(
+                    new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                    PylonSerializers.INTEGER
+            );
+            
+            // 2. Figure out how much XP we need to take to get to `xpCapacity`
+            int extraXpNeeded = xpCapacity - xp;
+    
+            // 3. Take as much XP from the player as we can to get there
+            int xpToTake = Math.min(event.getPlayer().calculateTotalExperiencePoints(), extraXpNeeded);
+            event.getPlayer().giveExp(-xpToTake);
+    
+            // 4. Set the new stored XP amount
+            getStack().editPersistentDataContainer(pdc -> pdc.set(
+                    new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                    PylonSerializers.INTEGER,
+                    xp + xpToTake
+            ));
+        }
     }
-}
-```
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="5-25"
+    override fun onUsedToRightClick(event: PlayerInteractEvent) {
+        if (event.player.isSneaking) {
+            // TODO discharge logic
+        } else {
+            // 1. Read how much XP we already have stored
+            val xp = stack.persistentDataContainer.get(
+                NamespacedKey(MyAddon.instance, "stored_xp"),
+                PylonSerializers.INTEGER
+            )!!
+            
+            // 2. Figure out how much XP we need to take to get to `xpCapacity`
+            val extraXpNeeded = xpCapacity - xp
+
+            // 3. Take as much XP from the player as we can to get there
+            val xpToTake = min(event.player.calculateTotalExperiencePoints(), extraXpNeeded)
+            event.player.giveExp(-xpToTake)
+
+            // 4. Set the new stored XP amount
+            stack.editPersistentDataContainer { pdc ->
+                pdc.set(
+                    NamespacedKey(MyAddon.instance, "stored_xp"),
+                    PylonSerializers.INTEGER,
+                    xp + xpToTake
+                )
+            }
+        }
+    }
+    ```
 
 ### The discharge logic
 
 And now for the discharge logic, which is quite similar:
 
-```java title="BaguetteOfWisdom.java" hl_lines="4-18"
-@Override
-public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
-    if (event.getPlayer().isSneaking()) {
-        // 1. Read how much XP we have stored
-        int xp = getStack().getPersistentDataContainer().get(
-            new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
-            PylonSerializers.INTEGER
-        );
-
-        // 2. Give all the XP to the player
-        event.getPlayer().giveExp(xp);
-
-        // 3. Set the stored XP to 0
-        getStack().editPersistentDataContainer(pdc -> pdc.set(
-            new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
-            PylonSerializers.INTEGER,
-            0
-        ));
-    } else {
-        ...
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="4-18"
+    @Override
+    public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
+        if (event.getPlayer().isSneaking()) {
+            // 1. Read how much XP we have stored
+            int xp = getStack().getPersistentDataContainer().get(
+                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                PylonSerializers.INTEGER
+            );
+    
+            // 2. Give all the XP to the player
+            event.getPlayer().giveExp(xp);
+    
+            // 3. Set the stored XP to 0
+            getStack().editPersistentDataContainer(pdc -> pdc.set(
+                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                PylonSerializers.INTEGER,
+                0
+            ));
+        } else {
+            ...
+        }
     }
-}
-```
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="3-19"
+    override fun onUsedToRightClick(event: PlayerInteractEvent) {
+        if (event.player.isSneaking) {
+            // 1. Read how much XP we have stored
+            val xp = stack.persistentDataContainer.get(
+                NamespacedKey(MyAddon.instance, "stored_xp"),
+                PylonSerializers.INTEGER
+            )!!
+
+            // 2. Give all the XP to the player
+            event.player.giveExp(xp)
+
+            // 3. Set the stored XP to 0
+            stack.editPersistentDataContainer { pdc ->
+                pdc.set(
+                    NamespacedKey(MyAddon.instance, "stored_xp"),
+                    PylonSerializers.INTEGER,
+                    0
+                )
+            }
+        } else {
+            ...
+        }
+    }
+    ```
 
 ### Adding a placeholder
 
 Finally, let's add in the placeholder for the stored charge:
 
-```java title="BaguetteOfWisdom.java" hl_lines="5-10"
-@Override
-public @NotNull List<PylonArgument> getPlaceholders() {
-    return List.of(
-            PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity)),
-            PylonArgument.of("stored_xp", UnitFormat.EXPERIENCE.format(
-                    getStack().getPersistentDataContainer().get(
-                            new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
-                            PylonSerializers.INTEGER
-                    ))
-            )
-    );
-}
-```
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="5-10"
+    @Override
+    public @NotNull List<PylonArgument> getPlaceholders() {
+        return List.of(
+                PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity)),
+                PylonArgument.of("stored_xp", UnitFormat.EXPERIENCE.format(
+                        getStack().getPersistentDataContainer().get(
+                                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                                PylonSerializers.INTEGER
+                        ))
+                )
+        );
+    }
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="3-8"
+    override fun getPlaceholders() = listOf(
+        PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity)),
+        PylonArgument.of("stored_xp", UnitFormat.EXPERIENCE.format(
+            stack.persistentDataContainer.get(
+                NamespacedKey(MyAddon.instance, "stored_xp"),
+                PylonSerializers.INTEGER
+            )!!
+        ))
+    )
+    ```
 
 ### Testing it out
 
@@ -337,24 +481,43 @@ So it looks like the error occurred on line 28, in the `getPlaceholders` functio
 !!! question "Wait, why did `getPlaceholders` get called and error *now*? We haven't given ourselves the item yet."
     Simply put, the guide also needs to call `getPlaceholders` to display the item to you. The error only appears once you open the guide - or once you give yourself the item with `/py give`.
 
+!!! Note "Null safety"
+    If you've been following along in Kotlin, you may have noticed that your error is different from the one above. Additionally, if you played around with the code a bit, you may have noticed that the Kotlin code refuses to compile unless you add a `!!` after the call to `get(...)` in the `getPlaceholders` function. This is because Kotlin actually tracks nulls in the type system, and will error during compile time instead of run time if you try to use a potentially null value without checking for null first. The `!!` tells the compiler, "hey, I know what I'm doing, this value will never be null." This is one of the advantages of using Kotlin over Java, as it can help catch potential null pointer exceptions before they even happen, and is one of the reasons why Pylon Core is written in Kotlin. In this situation, an Elvis operator (`?:`) or a call to `getOrDefault` would have been more appropriate, but for the purposes of this tutorial, we will leave it as is.
+
 This actually makes perfect sense if you think about it. At no point do we set a default value for the stored XP, so of course any call to get it will return null.
 
 ### Adding a default value
 
 To add a default value for stored XP to the PDC, we can modify the itemstack itself when we create it:
 
-```java title="MyAddon.java" hl_lines="3-7"
-NamespacedKey baguetteOfWisdomKey = new NamespacedKey(this, "baguette_of_wisdom");
-ItemStack baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
-        .editPdc(pdc -> pdc.set(
-                new NamespacedKey(this, "stored_xp"),
+=== "Java"
+    ```java title="MyAddon.java" hl_lines="3-7"
+    NamespacedKey baguetteOfWisdomKey = new NamespacedKey(this, "baguette_of_wisdom");
+    ItemStack baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
+            .editPdc(pdc -> pdc.set(
+                    new NamespacedKey(this, "stored_xp"),
+                    PylonSerializers.INTEGER,
+                    0
+            ))
+            .build();
+    PylonItem.register(BaguetteOfWisdom.class, baguetteOfWisdom);
+    BasePages.FOOD.addItem(baguetteOfWisdomKey);
+    ```
+=== "Kotlin"
+    ```kotlin title="MyAddon.kt" hl_lines="3-9"
+    val baguetteOfWisdomKey = NamespacedKey(this, "baguette_of_wisdom")
+    val baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
+        .editPdc { pdc ->
+            pdc.set(
+                NamespacedKey(this, "stored_xp"),
                 PylonSerializers.INTEGER,
                 0
-        ))
-        .build();
-PylonItem.register(BaguetteOfWisdom.class, baguetteOfWisdom);
-BasePages.FOOD.addItem(baguetteOfWisdomKey);
-```
+            )
+        }
+        .build()
+    PylonItem.register<BaguetteOfWisdom>(baguetteOfWisdom)
+    BasePages.FOOD.addItem(baguetteOfWisdomKey)
+    ```
 
 Now let's try again.
 
@@ -370,105 +533,225 @@ The Baguette of Wisdom works, but there are some improvements we can make.
 
 First, we could pull out the get/set code into their own functions:
 
-```java title="BaguetteOfWisdom.java" hl_lines="4-10 12-17"
-public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
-    ...
-
-    public void setStoredXp(int xp) {
-        getStack().editPersistentDataContainer(pdc -> pdc.set(
-                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
-                PylonSerializers.INTEGER,
-                xp
-        ));
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="4-10 12-17"
+    public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
+        ...
+    
+        public void setStoredXp(int xp) {
+            getStack().editPersistentDataContainer(pdc -> pdc.set(
+                    new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                    PylonSerializers.INTEGER,
+                    xp
+            ));
+        }
+    
+        public int getStoredXp() {
+            return getStack().getPersistentDataContainer().get(
+                    new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+                    PylonSerializers.INTEGER
+            );
+        }
     }
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="4-17"
+    class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack), PylonInteractor {
+        ...
 
-    public int getStoredXp() {
-        return getStack().getPersistentDataContainer().get(
-                new NamespacedKey(MyAddon.getInstance(), "stored_xp"),
+        var storedXp: Int
+            get() = stack.persistentDataContainer.get(
+                NamespacedKey(MyAddon.instance, "stored_xp"),
                 PylonSerializers.INTEGER
-        );
+            )!!
+            set(value) {
+                stack.editPersistentDataContainer { pdc ->
+                    pdc.set(
+                        NamespacedKey(MyAddon.instance, "stored_xp"),
+                        PylonSerializers.INTEGER,
+                        value
+                    )
+                }
+            }
     }
-}
-```
+    ```
+
+    !!! Note "Delegate"
+        Alternatively, Pylon provides a property delegate for persistent data values that can be used to simplify this even further:
+        
+        ```kotlin title="BaguetteOfWisdom.kt" hl_lines="4-8"
+        class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack), PylonInteractor {
+            ...
+    
+            var storedXp: Int by persistentData(
+                NamespacedKey(MyAddon.instance, "stored_xp"),
+                PylonSerializers.INTEGER,
+                0
+            )
+        }
+        ```
 
 And now, we can use these functions in the rest of the code, which is much cleaner:
 
-```java title="BaguetteOfWisdom.java" hl_lines="9 16 22 25 35"
-public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
-
-    ...
-
-    @Override
-    public @NotNull List<PylonArgument> getPlaceholders() {
-        return List.of(
-                PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity)),
-                PylonArgument.of("stored_xp", UnitFormat.EXPERIENCE.format(getStoredXp()))
-        );
-    }
-
-    @Override
-    public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
-        if (event.getPlayer().isSneaking()) {
-            int xp = getStoredXp();
-
-            // 2. Give all the XP to the player
-            event.getPlayer().giveExp(xp);
-
-            // 3. Set the stored XP to 0
-            setStoredXp(0);
-        } else {
-            // 1. Read how much XP we already have stored
-            int xp = getStoredXp();
-
-            // 2. Figure out how much XP we need to take to get to `xpCapacity`
-            int extraXpNeeded = xpCapacity - xp;
-
-            // 3. Take as much XP from the player as we can to get there
-            int xpToTake = Math.min(event.getPlayer().calculateTotalExperiencePoints(), extraXpNeeded);
-            event.getPlayer().giveExp(-xpToTake);
-
-            // 4. Set the new stored XP amount
-            setStoredXp(xp + xpToTake);
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="9 17 23 26 36"
+    public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
+    
+        ...
+    
+        @Override
+        public @NotNull List<PylonArgument> getPlaceholders() {
+            return List.of(
+                    PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity)),
+                    PylonArgument.of("stored_xp", UnitFormat.EXPERIENCE.format(getStoredXp()))
+            );
         }
+    
+        @Override
+        public void onUsedToRightClick(@NotNull PlayerInteractEvent event) {
+            if (event.getPlayer().isSneaking()) {
+                // 1. Read how much XP we already have stored
+                int xp = getStoredXp();
+    
+                // 2. Give all the XP to the player
+                event.getPlayer().giveExp(xp);
+    
+                // 3. Set the stored XP to 0
+                setStoredXp(0);
+            } else {
+                // 1. Read how much XP we already have stored
+                int xp = getStoredXp();
+    
+                // 2. Figure out how much XP we need to take to get to `xpCapacity`
+                int extraXpNeeded = xpCapacity - xp;
+    
+                // 3. Take as much XP from the player as we can to get there
+                int xpToTake = Math.min(event.getPlayer().calculateTotalExperiencePoints(), extraXpNeeded);
+                event.getPlayer().giveExp(-xpToTake);
+    
+                // 4. Set the new stored XP amount
+                setStoredXp(xp + xpToTake);
+            }
+        }
+    
+        ...
     }
+    ```
+=== "Kotlin"
+    
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="7 13 19 22 32"
+    class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack), PylonInteractor {
+    
+        ...
+    
+        override fun getPlaceholders() = listOf(
+            PylonArgument.of("xp_capacity", UnitFormat.EXPERIENCE.format(xpCapacity)),
+            PylonArgument.of("stored_xp", UnitFormat.EXPERIENCE.format(storedXp))
+        )
+    
+        override fun onUsedToRightClick(event: PlayerInteractEvent) {
+            if (event.player.isSneaking) {
+                // 1. Read how much XP we already have stored
+                val xp = storedXp
 
-    ...
-}
-```
+                // 2. Give all the XP to the player
+                event.player.giveExp(xp)
+
+                // 3. Set the stored XP to 0
+                storedXp = 0
+            } else {
+                // 1. Read how much XP we already have stored
+                val xp = storedXp
+
+                // 2. Figure out how much XP we need to take to get to `xpCapacity`
+                val extraXpNeeded = xpCapacity - xp
+
+                // 3. Take as much XP from the player as we can to get there
+                val xpToTake = min(event.player.calculateTotalExperiencePoints(), extraXpNeeded)
+                event.player.giveExp(-xpToTake)
+
+                // 4. Set the new stored XP amount
+                storedXp = xp + xpToTake
+            }
+        }
+    
+        ...
+    }
+    ```
 
 The second thing we should do is reuse NamespacedKeys. This is more of a 'best practice' thing - it's generally recommend to reuse keys. It'll become more apparent why later on.
 
-```java title="BaguetteOfWisdom.java" hl_lines="2 8 16"
-public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
-    public static final NamespacedKey STORED_XP_KEY = new NamespacedKey(MyAddon.getInstance(), "stored_xp");
-
-    ...
+=== "Java"
+    ```java title="BaguetteOfWisdom.java" hl_lines="2 8 16"
+    public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
+        public static final NamespacedKey STORED_XP_KEY = new NamespacedKey(MyAddon.getInstance(), "stored_xp");
     
-    public void setStoredXp(int xp) {
-        getStack().editPersistentDataContainer(pdc -> pdc.set(
-                STORED_XP_KEY,
-                PylonSerializers.INTEGER,
-                xp
-        ));
-    }
-
-    public int getStoredXp() {
-        return getStack().getPersistentDataContainer().get(
+        ...
+        
+        public void setStoredXp(int xp) {
+            getStack().editPersistentDataContainer(pdc -> pdc.set(
+                    STORED_XP_KEY,
+                    PylonSerializers.INTEGER,
+                    xp
+            ));
+        }
+    
+        public int getStoredXp() {
+            return getStack().getPersistentDataContainer().get(
+                    STORED_XP_KEY,
+                    PylonSerializers.INTEGER
+            );
+        }
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteOfWisdom.kt" hl_lines="2-4 10 16"
+    class BaguetteOfWisdom(stack: ItemStack) : PylonItem(stack), PylonInteractor {
+        companion object {
+            val STORED_XP_KEY = NamespacedKey(MyAddon.instance, "stored_xp")
+        }
+    
+        ...
+    
+        var storedXp: Int
+            get() = stack.persistentDataContainer.get(
                 STORED_XP_KEY,
                 PylonSerializers.INTEGER
-        );
-    }
-```
+            )!!
+            set(value) {
+                stack.editPersistentDataContainer { pdc ->
+                    pdc.set(
+                        STORED_XP_KEY,
+                        PylonSerializers.INTEGER,
+                        value
+                    )
+                }
+            }
+    ```
 
-```java title="MyAddon.java" hl_lines="3"
-ItemStack baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
-        .editPdc(pdc -> pdc.set(
+[](another tab break)
+
+=== "Java"
+    ```java title="MyAddon.java" hl_lines="3"
+    ItemStack baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
+            .editPdc(pdc -> pdc.set(
+                    BaguetteOfWisdom.STORED_XP_KEY,
+                    PylonSerializers.INTEGER,
+                    0
+            ))
+            .build();
+    ```
+=== "Kotlin"
+    ```kotlin title="MyAddon.kt" hl_lines="4"
+    val baguetteOfWisdom = ItemStackBuilder.pylonItem(Material.BREAD, baguetteOfWisdomKey)
+        .editPdc { pdc ->
+            pdc.set(
                 BaguetteOfWisdom.STORED_XP_KEY,
                 PylonSerializers.INTEGER,
                 0
-        ))
-        .build();
-```
+            )
+        }
+        .build()
+    ```
 
 And that's it!
 

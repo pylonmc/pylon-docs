@@ -117,27 +117,41 @@ Sometimes, we need to communicate values from the code to the lore, like the bur
 
 The `PylonItem` class has a method called `getPlaceholders`. This method - when implemented - returns a list of placeholders to substitute into the item's lore. Let's implement it for BaguetteFlamethrower:
 
-```java title="BaguetteFlamethrower.java" hl_lines="13-18"
-public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
-    private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
-
-    public BaguetteFlamethrower(@NotNull ItemStack stack) {
-        super(stack);
+=== "Java"
+    ```java title="BaguetteFlamethrower.java" hl_lines="13-18"
+    public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
+        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
+    
+        public BaguetteFlamethrower(@NotNull ItemStack stack) {
+            super(stack);
+        }
+    
+        @Override
+        public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
+            event.getRightClicked().setFireTicks(burnTimeTicks);
+        }
+    
+        @Override
+        public @NotNull List<PylonArgument> getPlaceholders() {
+            return List.of(
+                    PylonArgument.of("burn-time", burnTimeTicks / 20.0)
+            );
+        }
     }
-
-    @Override
-    public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
-        event.getRightClicked().setFireTicks(burnTimeTicks);
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteFlamethrower.kt" hl_lines="8-9"
+    class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack), PylonItemEntityInteractor {
+        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", Int::class.java)
+    
+        override fun onUsedToRightClickEntity(event: PlayerInteractEntityEvent) {
+            event.rightClicked.fireTicks = burnTimeTicks
+        }
+    
+        override fun getPlaceholders() =
+            listOf(PylonArgument.of("burn-time", burnTimeTicks / 20.0))
     }
-
-    @Override
-    public @NotNull List<PylonArgument> getPlaceholders() {
-        return List.of(
-                PylonArgument.of("burn-time", burnTimeTicks / 20.0)
-        );
-    }
-}
-```
+    ```
 
 Now we can use that placeholder in the item lore. The placeholder is the string you supplied, surrounded by % - so in this case `%burn-time%`:
 ```yaml title="en.yml" hl_lines="6"
@@ -158,27 +172,41 @@ baguette_flamethrower:
 
 One final thing. We're currently manually adding 'seconds' - but Pylon has a units API we can use. This API can automatically choose how to format the unit. It's very simple to use:
 
-```java title="BaguetteFlamethrower.java" hl_lines="16"
-public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
-    private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
-
-    public BaguetteFlamethrower(@NotNull ItemStack stack) {
-        super(stack);
+=== "Java"
+    ```java title="BaguetteFlamethrower.java" hl_lines="16"
+    public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
+        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
+    
+        public BaguetteFlamethrower(@NotNull ItemStack stack) {
+            super(stack);
+        }
+    
+        @Override
+        public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
+            event.getRightClicked().setFireTicks(burnTimeTicks);
+        }
+    
+        @Override
+        public @NotNull List<PylonArgument> getPlaceholders() {
+            return List.of(
+                    PylonArgument.of("burn-time", UnitFormat.SECONDS.format(burnTimeTicks / 20.0))
+            );
+        }
     }
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteFlamethrower.kt" hl_lines="9"
+    class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack), PylonItemEntityInteractor {
+        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", Int::class.java)
 
-    @Override
-    public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
-        event.getRightClicked().setFireTicks(burnTimeTicks);
-    }
+        override fun onUsedToRightClickEntity(event: PlayerInteractEntityEvent) {
+            event.rightClicked.fireTicks = burnTimeTicks
+        }
 
-    @Override
-    public @NotNull List<PylonArgument> getPlaceholders() {
-        return List.of(
-                PylonArgument.of("burn-time", UnitFormat.SECONDS.format(burnTimeTicks / 20.0))
-        );
+        override fun getPlaceholders() =
+            listOf(PylonArgument.of("burn-time", UnitFormat.SECONDS.format(burnTimeTicks / 20.0)))
     }
-}
-```
+    ```
 
 ```yaml title="en.yml" hl_lines="6"
 baguette_flamethrower:
