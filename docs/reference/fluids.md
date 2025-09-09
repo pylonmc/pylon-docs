@@ -1,7 +1,7 @@
 # Fluids
 
-!!! info "Trying to create a block that consumes or produces fluids?"
-    See the 'Fluid blocks' tutorial for a detailed tutorial on how to do this. This page is information-heavy and intended mainly to serve as documentation for those who want to get into the details.
+!!! abstract "Trying to create a block that consumes or produces fluids?"
+    See the 'Fluid blocks' tutorial. This is a technical description of how fluids work.
 
 ## Fluid points
 

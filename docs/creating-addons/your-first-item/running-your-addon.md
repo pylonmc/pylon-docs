@@ -19,7 +19,7 @@ Once the server has started, you can connect on `localhost:25565`. Make sure you
 
 ## Getting the item
 
-Now, you can give yourself your item. You can do this using `/py give`. For example, `/py give Idra addon-template:baguette`. If you've done everything right, you should receive your new sword item. If you try to hit an entity with the sword, you'll notice that it doesn't take damage. The sword is unbreakable!
+Now, you can give yourself your item. You can do this using `/py give`. For example, `/py give Idra my-addon:baguette`. If you've done everything right, you should receive your new baguette.
 
 But wait...
 
@@ -27,5 +27,5 @@ What's going on here?
 
 ![Baguette with missing translation keys](img/baguette-missing-translation-key.png)
 
-Notice that when we created our sword, we didn't give it a name! To do that, we're going to need to use the language system. Don't worry, it's very straightforward - we'll cover it in the next section.
+Notice that when we created our baguette, we didn't give it a name! To do that, we're going to need to use the language system. Don't worry, it's very straightforward - we'll cover it in the next section.
 

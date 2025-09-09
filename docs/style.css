@@ -21,3 +21,12 @@ h5 {
 h6 {
     font-weight: bold !important;
 }
+
+:root  > * {
+  --md-primary-fg-color: #469895;
+}
+
+.md-grid {
+  max-width: 1500px; /* default is 1220px */
+}
+

@@ -9,6 +9,21 @@ theme:
   favicon: img/favicon.png
   palette:
     scheme: slate
+    primary: custom
+    accent: cyan
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.footer
+  icon:
+    repo: simple/github
+
+extra:
+  social:
+    - icon: simple/discord
+      link: https://discord.gg/4tMAnBAacW
+    - icon: simple/github
+      link: https://github.com/pylonmc
 
 extra_css:
   - style.css
@@ -20,21 +35,30 @@ nav:
     - List of addons: installation/list-of-addons.md
     - Commands & permissions: installation/commands-and-permissions.md
   - Creating addons:
-    - "Getting started": creating-addons/getting-started.md
-    - "Your first item":
+    - Getting started: creating-addons/getting-started.md
+    - Your first item:
       - Adding an item: creating-addons/your-first-item/adding-an-item.md
       - Running your addon: creating-addons/your-first-item/running-your-addon.md
       - Adding name & lore: creating-addons/your-first-item/adding-name-and-lore.md
-      - Wrapping up: creating-addons/your-first-item/wrapping-up.md
-    - "Custom item classes": []
-  - Documentation:
-    - "Fluids": documentation/fluids.md
+      - Full code: creating-addons/your-first-item/full-code.md
+      - Practice tasks: creating-addons/your-first-item/practice-tasks.md
+    - Custom items:
+      - Adding a custom item: creating-addons/custom-items/adding-a-custom-item.md
+      - Making items configurable: creating-addons/custom-items/making-items-configurable.md
+      - Advanced lore: creating-addons/custom-items/advanced-lore.md
+      - Persistent data: creating-addons/custom-items/persistent-data.md
+      - Full code: creating-addons/custom-items/full-code.md
+      - Practice tasks: creating-addons/custom-items/practice-tasks.md
+  - Reference:
+    - Fluids: reference/fluids.md
+  - Javadocs: javadocs.md
   - Contributing:
     - Getting started: contributing/getting-started.md
     - Contributing to docs: contributing/contributing-to-docs.md
 
 markdown_extensions:
   - def_list
+  - attr_list
   - pymdownx.highlight:
       anchor_linenums: true
       linenums: true
@@ -45,3 +69,6 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - admonition
+
+plugins:
+  - open-in-new-tab

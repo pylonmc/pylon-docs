@@ -27,12 +27,12 @@ item.setName("item.nuclear-bomb.name")
 <small>(not real code - just for demonstration purposes)</small>
 
 Now, we can create a different file for each language, containing all the translation keys for that language!
-```yml title="en.yml"
+```yaml title="en.yml"
 item.nuclear-bomb.name: "Nuclear Bomb"
 ```
 <small>(not real code - just for demonstration purposes)</small>
 
-```yml title="es.yml"
+```yaml title="es.yml"
 item.nuclear-bomb.name: "Bomba Nuclear"
 ```
 <small>(not real code - just for demonstration purposes)</small>
@@ -47,11 +47,11 @@ Remember how we did `item.setName("item.nuclear-bomb.name")` above? In Pylon, yo
 
 Open the 'en.yml' file ('en' is a code for 'English') in the `src/main/resources/lang` folder.
 
-??? Note "Adding translations for other languages"
+!!! Note "Adding translations for other languages"
     If we wanted to create a Spanish language file, we would call it 'es.yml' - or 'cs.yml' for Czech, and so on. See [this Wikipedia page](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) for a full list of these 2-letter codes.
 
 Next, add this inside the file:
-```yml title="en.yml"
+```yaml title="en.yml" hl_lines="3-7"
 addon: "<your addon name here>"
 
 item:
@@ -63,14 +63,15 @@ item:
 
 Note that we have an `addon` key. This is just the name of your addon.
 
-We've also added `name` and `lore` for our sword. Notice that we're using `baguette` here because that's the key that we created earlier, in this line:
+We've also added `name` and `lore` for our baguette. Notice that we're using `baguette` here because that's the key that we created earlier, in this line:
 ```java
 NamespacedKey baguetteKey = new NamespacedKey(this, "baguette");
 ```
 
-??? question "What's all this &lt;arrow&gt; and &lt;red&gt; and &lt;/red&gt; business?"
-    We'll go into this more later, but Pylon uses [MiniMessage](https://docs.advntr.dev/minimessage/index.html) formatting. Pylon also has its own custom tags - &lt;arrow&gt; is an example of this. (TODO add links to language page)
+!!! question "What's all this &lt;arrow&gt; and &lt;red&gt; and &lt;/red&gt; business?"
+    We go into this in the [Advanced Lore] chapter.
 
-Start up the server again. Your sword should now have name and lore!
+Start up the server again. Your baguette should now have name and lore!
 ![Baguette with translations](img/baguette.png)
 
+[Advanced Lore]: ../custom-items/advanced-lore.md
