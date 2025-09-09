@@ -15,6 +15,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.footer
+    - content.tabs.link
   icon:
     repo: simple/github
 
@@ -64,6 +65,8 @@ markdown_extensions:
       linenums: true
       guess_lang: false
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.details
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
