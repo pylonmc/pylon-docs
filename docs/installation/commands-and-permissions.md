@@ -24,3 +24,4 @@
 | `/py research points set <player> <amount>`      | `pylon.command.research.points.set` |
 | `/py research points subtract <player> <amount>` | `pylon.command.research.points.set` |
 | `/py setblock <block>`                           | `pylon.command.setblock`            |
+| `/py confetti <amount>`                          | `pylon.command.confetti`            |
