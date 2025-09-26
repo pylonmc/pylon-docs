@@ -64,9 +64,14 @@ item:
 Note that we have an `addon` key. This is just the name of your addon.
 
 We've also added `name` and `lore` for our baguette. Notice that we're using `baguette` here because that's the key that we created earlier, in this line:
-```java
-NamespacedKey baguetteKey = new NamespacedKey(this, "baguette");
-```
+=== "Java" 
+    ```java
+    NamespacedKey baguetteKey = new NamespacedKey(this, "baguette");
+    ```
+=== "Kotlin"
+    ```kotlin
+    val baguetteKey = NamespacedKey(this, "baguette")
+    ```
 
 !!! question "What's all this &lt;arrow&gt; and &lt;red&gt; and &lt;/red&gt; business?"
     We go into this in the [Advanced Lore] chapter.

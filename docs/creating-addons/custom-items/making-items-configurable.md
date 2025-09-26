@@ -36,43 +36,66 @@ Pylon will automatically copy all of your settings files into `run/plugins/Pylon
 
 To read the `burn-time-ticks` value from the config file, we can use `getSettings().getOrThrow(...)`:
 
-```java title="BaguetteFlamethrower.java" hl_lines="2"
-public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
-    private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
-
-    public BaguetteFlamethrower(@NotNull ItemStack stack) {
-        super(stack);
+=== "Java"
+    ```java title="BaguetteFlamethrower.java" hl_lines="2"
+    public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
+        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
+    
+        public BaguetteFlamethrower(@NotNull ItemStack stack) {
+            super(stack);
+        }
+    
+        @Override
+        public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
+            event.getRightClicked().setFireTicks(40);
+        }
     }
-
-    @Override
-    public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
-        event.getRightClicked().setFireTicks(40);
+    ```
+    !!! question "How does Pylon know which config file to use?"
+        Config files are actually per **key**, not per item. When calling `getSettings()`, all this does is take the item's key and find the settings file for it! It's just a shorthand for `Settings.get(getKey())`. If you used `Settings.get(new NamespacedKey(MyAddon.getInstance(), "buffoon"))` then the `buffoon.yml` settings file would be read instead.
+=== "Kotlin"
+    ```kotlin title="BaguetteFlamethrower.kt" hl_lines="2"
+    class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack), PylonItemEntityInteractor {
+        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", Int::class.java)
+    
+        override fun onUsedToRightClickEntity(event: PlayerInteractEntityEvent) {
+            event.rightClicked.fireTicks = 40
+        }
     }
-}
-```
-
-!!! question "How does Pylon know which config file to use?"
-    Config files are actually per **key**, not per item. When calling `getSettings()`, all this does is take the item's key and find the settings file for it! It's just a shorthand for `Settings.get(getKey())`. If you used `Settings.get(new NamespacedKey(MyAddon.getInstance(), "buffoon"))` then the `buffoon.yml` settings file would be read instead.
+    ```
+    !!! question "How does Pylon know which config file to use?"
+        Config files are actually per **key**, not per item. When accessing `settings`, all this does is take the item's key and find the settings file for it! It's just a shorthand for `Settings.get(key)`. If you used `Settings.get(NamespacedKey(MyAddon.instance, "buffoon"))` then the `buffoon.yml` settings file would be read instead.
 
 !!! question "Why are we using `getOrThrow` instead of `get`?"
     Settings also have a `get` method. This method just returns null if the key was not found, so it should only be used where you don't necessarily *need* the key. If you use `getOrThrow`, a nice exception will be thrown with some information on what key is missing and where.
 
 And now we can use that value when setting entities on fire!
 
-```java title="BaguetteFlamethrower.java" hl_lines="10"
-public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
-    private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
-
-    public BaguetteFlamethrower(@NotNull ItemStack stack) {
-        super(stack);
+=== "Java"
+    ```java title="BaguetteFlamethrower.java" hl_lines="10"
+    public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
+        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
+    
+        public BaguetteFlamethrower(@NotNull ItemStack stack) {
+            super(stack);
+        }
+    
+        @Override
+        public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
+            event.getRightClicked().setFireTicks(burnTimeTicks);
+        }
     }
-
-    @Override
-    public void onUsedToRightClickEntity(@NotNull PlayerInteractEntityEvent event) {
-        event.getRightClicked().setFireTicks(burnTimeTicks);
+    ```
+=== "Kotlin"
+    ```kotlin title="BaguetteFlamethrower.kt" hl_lines="5"
+    class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack), PylonItemEntityInteractor {
+        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", Int::class.java)
+    
+        override fun onUsedToRightClickEntity(event: PlayerInteractEntityEvent) {
+            event.rightClicked.fireTicks = burnTimeTicks
+        }
     }
-}
-```
+    ```
 
 Try changing the config value, and the burn time should change with it.
 
