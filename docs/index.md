@@ -56,21 +56,21 @@ Documentation **(heavy work in progress):** [https://pylonmc.github.io/](https:/
 
 Currently, the core team developing Pylon is:
 
-@seggan :flag_us: - a veteran Slimefun addon developer behind SlimefunWarfare, SFCalc, and the very successful Galactifun addon, with a very impressive contribution record for other addons, the Paper server software, and Slimefun itself. Seggan is responsible for many of the core Pylon systems, including most notably the entire translation system, WAILA, the research system, the internal registry system, and the recipe system (and has done lots more smaller features!).
-
 @ohmvir :flag_ca: - a relatively fresh but enthusiastic face from MetaMechanists who's new to plugin development, but has done a fantastic job getting up to speed and adding lots of base content, like the health talismans and beheading sword, as well as tackling various tasks that need doing here and there.
 
-@overlordidra (me!) :flag_gb: - owner of MetaMechanists (a popular Slimefun server) for over 4 years and the developer behind Quaptics. Many of the core systems - most notably the Pylon guide, the fluid system, hydraulics, the automated test code, and the core systems that keep track of custom blocks/entities/items, are my doing.
+@overlordidra :flag_gb: - owner of MetaMechanists (a popular Slimefun server) for over 4 years and the developer behind Quaptics. Many of the core systems - most notably the Pylon guide, the fluid system, hydraulics, the automated test code, and the core systems that keep track of custom blocks/entities/items, are his doing.
+
+@seggan :flag_us: - a veteran Slimefun addon developer behind SlimefunWarfare, SFCalc, and the very successful Galactifun addon, with a very impressive contribution record for other addons, the Paper server software, and Slimefun itself. Seggan is responsible for many of the core Pylon systems, including most notably the entire translation system, WAILA, the research system, the internal registry system, and the recipe system (and has done lots more smaller features!).
 
 We also have help from:
 
 @ihateblueb who has run a Slimefun server (Orchid) and is helping us add more content (the elevator is her doing!).
 
-@.ph.enix who is handling all our CI - he's set up automatic testing on our pull requests, and set up the system to publish new versions of Pylon.
+@justahuman_xd who is responsible for many of the more hacky things we do, namely the block and armor texture systems. He also has a *lot* of Slimefun development experience under his belt and has given a lot of useful input and guidance on the project.
 
-@justahuman_xd who hasn't contributed directly but has a *lot* of Slimefun development experience under his belt and has given a lot of useful input and guidance on the project.
+@.ph.enix who used to manage all our CI - he set up automatic testing on our pull requests, and set up the system to publish new versions of Pylon. Unfortunately, he has left the project, but we are very grateful for all his help!
 
-@vaan1310 who has't contributed directly, but has helped with some of the smaller stuff (namely reviewing pull requests).
+@vaan1310 who has implemented quite a few bits here and there, such as bug fixes and data-driven researches, as well as helping out with pull request reviews.
 
 If you're interested in helping out, drop us a message on our Discord server! You don't have to be an expert to help, a little plugin development experience is enough - there are plenty of tasks to do, ranging from trivial to exceptionally complex, so just let us know if you're interested and we can find something for you to do.
 
