@@ -55,6 +55,7 @@ nav:
   - Javadocs: javadocs.md
   - Contributing:
     - Getting started: contributing/getting-started.md
+    - The Pylon Master Project: contributing/master-project.md
     - Contributing to docs: contributing/contributing-to-docs.md
 
 markdown_extensions:

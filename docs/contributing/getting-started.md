@@ -8,9 +8,9 @@ Pylon Base is written in Java.
 
 1. Clone the `pylon` repository: `git clone https://github.com/pylonmc/pylon` (or use a GUI like Github Desktop)
 2. If you're using IntelliJ, it'll set everything up automatically. If not, run `./gradlew`. This will clone the `pylon-core` and `pylon-base` repositories.
-3. If you want to submit your changes to the Pylon project, **delete the pylon-core or pylon-base directory (depending on which one you want to contribute to), fork the pylon-core or pylon-base repository, and clone your fork into the same directory.** Otherwise, you won't be able to open a pull request with your changes (unless you're a Pylon developer and have access to the Pylon repositories).
-4. To run the tests, open the Gradle menu in IntelliJ, click 'pylon' -> 'pylon' -> 'Tasks' -> 'run paper' -> 'runLiveTests'. If you're not using IntelliJ, run `./gradlew runLiveTests`. This will start a server and run the test addon.
-5. To run a server with your local versions of `pylon-core` and `pylon-base`, open the Gradle menu in IntelliJ, click 'pylon' -> 'pylon' -> 'Tasks' -> 'run paper' -> 'runSnapshotServer'. If you're not using IntelliJ, run `./gradlew runSnapshotServer`. This will start a server which you can then join by connecting to `localhost` from Minecraft. The server's files will be located in the `run` directory.
+3. If you want to submit your changes to the Pylon project, **delete the `pylon-core` or `pylon-base` directory (depending on which one you want to contribute to), fork the pylon-core or pylon-base repository, and clone your fork into the same directory.** Otherwise, you won't be able to open a pull request with your changes (unless you're a Pylon developer and have access to the Pylon repositories).
+
+See the [Pylon Master Project](./master-project) page for more information about the master repository.
 
 ## Submitting your contributions
 
@@ -18,13 +18,17 @@ We generally welcome contributions for both Core and Base, but it's best check w
 
 Once you're done with your changes, open a pull request and give some information about what you did and why you did it.
 
-## Pylon master repository
-
-Pylon has a master repository that contains both `pylon-core` and `pylon-base`. This allows you to run base using your very own home-baked version of core, which allows you to test new features much more easily. This is what the 'How to get started' section used. We recommend you make changes to both base and core using the master repository, and the rest of this guide will assume you're using it.
-
 ## Tests
 
-Pylon core has a set of integration tests. Tests should only be added for critical functionality such as block storage and recipes.
+Pylon Core has a set of integration tests. Tests should only be added for critical functionality such as block storage and recipes.
+
+## Custom Dokka
+
+Pylon uses a custom version of Dokka to generate Javadocs. This is because the default Dokka output is very buggy and doesn't look very good. Seggan has submitted pull requests to the Dokka project to fix the issues, but they haven't been merged yet, so in the meantime we use a custom version. If you wish to see the "fixed" doc output, here are the steps:
+1. Clone the `pylonmc/dokka` repository: `git clone https://github.com/pylonmc/dokka`
+2. Checkout the `pylon` branch: `git checkout pylon`
+3. In the root directory, execute `./gradlew publishToMavenLocal -Pversion=2.1.0-pylon-SNAPSHOT`. Note that as Dokka is a very large project, the first build will take a long time. On Seggan's decent-ish laptop, the first run took about 10 minutes. Subsequent builds will be much faster as long s you don't delete the build cache.
+4. Now, in the Pylon master project, execute `./gradlew :pylon-core:pylon-core:dokkaGenerate -PusePylonDokka=true`. The generated output will be under `pylon/pylon-core/pylon-core/build/dokka`.
 
 ## I'm stuck, what next?
 
