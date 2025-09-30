@@ -17,11 +17,12 @@ pylon/
 
 ## Tasks
 The Pylon master project contains a few tasks that are useful for development:
-| Task | Alias | Description |
-|------|-------|-------------|
-| `runServer` | `runSnapshotServer` | Runs a Minecraft server with the current version of Pylon Base and Pylon Core |
-| `:pylon-base:runServer` | `runStableServer` | Runs a Minecraft server with the latest stable version of Pylon Core and the current version of Pylon Base |
-| `:pylon-core:test:runServer` | `runLiveTests` | Executes the integration tests for Pylon Core |
+
+| Task                         | Alias               | Description                                                                                                |
+|------------------------------|---------------------|------------------------------------------------------------------------------------------------------------|
+| `runServer`                  | `runSnapshotServer` | Runs a Minecraft server with the current version of Pylon Base and Pylon Core                              |
+| `:pylon-base:runServer`      | `runStableServer`   | Runs a Minecraft server with the latest stable version of Pylon Core and the current version of Pylon Base |
+| `:pylon-core:test:runServer` | `runLiveTests`      | Executes the integration tests for Pylon Core                                                              |
 
 !!! danger
     If you are launching the tasks using the aliases from IntelliJ and attach the debugger, you will notice that it will not work. I have no idea why this happens. In order to successfully attach the debugger, you need to run the actual tasks, not the aliases. For example, instead of running `runSnapshotServer`, run `runServer`.
