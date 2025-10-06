@@ -2,12 +2,20 @@
 
 We use [MkDocs](https://www.mkdocs.org/) and [Github pages](https://pages.github.com/) for the documentation site you're reading right now.
 
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+- **Python 3** - Required for MkDocs
+- **pip** - Python package installer (usually comes with Python)
+
+Check [MkDocs' installation guide](https://www.mkdocs.org/user-guide/installation/) on how to install these dependencies.
+
 ## How to get started
 
 1. Clone the `pylon-docs` repository: `git clone https://github.com/pylonmc/pylon-docs`
-2. Install MkDocs using pip: `pip install mkdocs`
-3. Install the MkDocs material theme: `pip install mkdocs-material`
-4. Run the documentation website locally using `mkdocs serve`
+2. Install all required dependencies: `pip install -r requirements.txt`
+3. Run the documentation website locally using `mkdocs serve`
 
 ## Deploying
 
