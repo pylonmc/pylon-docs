@@ -76,3 +76,13 @@ markdown_extensions:
 
 plugins:
   - open-in-new-tab
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
