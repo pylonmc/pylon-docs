@@ -1,0 +1,24 @@
+name: PR Checker
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      
+      - name: Setup Python
+        uses: actions/setup-python@2e3e4b15a884dc73a63f962bff250a855150a234
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+          pip-install: -r requirements.txt
+      
+      - name: Check documentation build
+        run: |
+          mkdocs build --strict
