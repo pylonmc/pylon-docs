@@ -5,30 +5,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
-      
-      - name: Setup Python
-        uses: actions/setup-python@2e3e4b15a884dc73a63f962bff250a855150a234
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          python-version: '3.13'
-          cache: 'pip'
-          pip-install: -r requirements.txt
-      
-      - name: Build documentation
-        run: mkdocs build
-      
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+      - run: pip install \
+            mkdocs-material
+      - run: mkdocs gh-deploy --config-file mkdocs.yml --force
+
+  deploy:
+    needs: build
+    
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@4b09552702d0b65573696410d4707c765da2630b
-        with:
-          personal_token: ${{ secrets.DOCS_DEPLOY_TOKEN }}
-          external_repository: pylonmc/pylonmc.github.io
-          publish_branch: master
-          publish_dir: ./site
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'Deploy ${{ github.sha }}'
+        id: deployment
+        uses: actions/deploy-pages@v4
