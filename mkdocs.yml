@@ -86,3 +86,6 @@ plugins:
           default: true
           name: English
           build: true
+        - locale: zh-TW
+          name: 繁體中文
+          build: true
