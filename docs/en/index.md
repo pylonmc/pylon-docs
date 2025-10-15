@@ -3,7 +3,7 @@ Pylon is an **upcoming** Minecraft Java plugin that will hugely expand vanilla g
 Pylon uses an addon system, meaning anyone can add content to Pylon by writing an addon for it! It also comes with a number of really useful features, such as:
 
 - First-class translation support, meaning each player can select their own language.
-- Extensive configuration options, including per-machine configuration. 
+- Extensive configuration options, including per-machine configuration.
 - An intuitive and user-friendly guide to help players figure out the plugin.
 
 ## :frame_photo: Pylon in pictures (so far)
@@ -25,9 +25,9 @@ Pylon uses an addon system, meaning anyone can add content to Pylon by writing a
 
 We have built Pylon with performance and stability in mind from day 1:
 
-- Pylon makes **extensive** use of caching and will run most performance-intensive systems asynchronously, as well as makeing use of modern concurrency/performance features such as coroutines. 
-- In addition, the plugin will have a broad range of config options to help performance - including per-machine tick rates, the ability to limit the number of machines placed by player/chunk/etc, the tick rate of fluid/energy/etc, and more. 
-- The way Pylon is designed minimises the chance of data corruption and has a range of error-handling mechanisms if something does go wrong. 
+- Pylon makes **extensive** use of caching and will run most performance-intensive systems asynchronously, as well as makeing use of modern concurrency/performance features such as coroutines.
+- In addition, the plugin will have a broad range of config options to help performance - including per-machine tick rates, the ability to limit the number of machines placed by player/chunk/etc, the tick rate of fluid/energy/etc, and more.
+- The way Pylon is designed minimises the chance of data corruption and has a range of error-handling mechanisms if something does go wrong.
 Note: Pylon will likely not be fully compatible with bedrock.
 
 ## :calendar: Provisional timeline
@@ -75,4 +75,5 @@ We also have help from:
 If you're interested in helping out, drop us a message on our Discord server! You don't have to be an expert to help, a little plugin development experience is enough - there are plenty of tasks to do, ranging from trivial to exceptionally complex, so just let us know if you're interested and we can find something for you to do.
 
 ## :question: Got questions?
+
 Drop a message on our Discord server and we'll be happy to answer.
