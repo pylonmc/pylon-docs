@@ -1,6 +1,6 @@
 # Using the language system
 
-## What is the language system?
+## What is a language system?
 
 'Language system' might sound intimidating if you've never used one before, but it's very straightforward. A language system is just a way to make things translateable.
 
@@ -41,11 +41,11 @@ Obviously, we'll need some system to substitute in the right translation for the
 
 ---
 
-## Adding name and lore to our baguette
+## Using Pylon's language system
 
 Remember how we did `item.setName("item.nuclear-bomb.name")` above? In Pylon, you don't need to do that because Pylon **automatically generates the translation key** based on your item's key. All we need to do is create translation files and make sure they contain the correct keys.
 
-Open the 'en.yml' file ('en' is a code for 'English') in the `src/main/resources/lang` folder.
+Let's do this for the Baguette (fom the previous section). Open the 'en.yml' file ('en' is a code for 'English') in the `src/main/resources/lang` folder.
 
 !!! Note "Adding translations for other languages"
     If we wanted to create a Spanish language file, we would call it 'es.yml' - or 'cs.yml' for Czech, and so on. See [this Wikipedia page](https://minecraft.wiki/w/Language) for a full list of these 2-letter codes.
@@ -63,7 +63,7 @@ item:
 
 Note that we have an `addon` key. This is just the name of your addon.
 
-We've also added `name` and `lore` for our baguette. Notice that we're using `baguette` here because that's the key that we created earlier, in this line:
+We've also added `name` and `lore` for the baguette. Notice that we're using `baguette` here because that's the key that identifies the baguette, as we specified in this line:
 === "Java" 
     ```java
     NamespacedKey baguetteKey = new NamespacedKey(this, "baguette");

@@ -17,9 +17,9 @@ Once the server has started, you can connect on `localhost:25565`. Make sure you
 
 ---
 
-## Getting the item
+## Testing the baguette
 
-Now, you can give yourself your item. You can do this using `/py give`. For example, `/py give Idra my-addon:baguette`. If you've done everything right, you should receive your new baguette.
+Now, you can give yourself the Baguette from the previous section. You can do this using `/py give`. For example, `/py give Idra my-addon:baguette`. If you've done everything right, you should receive your new baguette.
 
 But wait...
 

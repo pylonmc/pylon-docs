@@ -2,13 +2,11 @@
 
 ## Overview
 
-So far, we've created a 'custom' item in the sense that we've changed the amount of hunger filled up by the baguette from 5 to 6. But what if we want to, for example, be able to right click entities with the baguette to set them on fire? There's no inbuilt way to do this like there was with food. We'll have to write some code to do this for us.
+This section describes how to attach custom behaviour to an item. We'll demonstrate this by creating a baguette flamethrower which sets entities on fire when they are right clicked.
 
 ---
 
 ## The baguette flamethrower
-
-To illustrate this, let's create a new 'baguette flamethrower' item.
 
 ### Creating a 'normal item'
 
@@ -43,7 +41,7 @@ item:
 
 Next, we'll add the code to set entities on fire.
 
-In order to do this, we can create a custom `BaguetteFlamethrower` class. All Pylon item classes must extend [PylonItem].
+In order to do this, we must create a custom `BaguetteFlamethrower` class. All Pylon item classes must extend [PylonItem].
 
 === "Java"
     Create a new file `BaguetteFlamethrower.java` and add the following:
@@ -62,7 +60,13 @@ In order to do this, we can create a custom `BaguetteFlamethrower` class. All Py
     class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack)
     ```
 
-We now want to do something whenever the player right clicks on a block while holding the baguette flamethrower. In order to do this, we can implement [PylonItemEntityInteractor] interface. This is a builtin Pylon interface with one method: `onUsedToRightClickEntity`.
+We now want to run some code when the player right clicks on an entity while holding the baguette flamethrower. In order to do this, we need to implement a Pylon item interface. 
+
+Pylon item interfaces are just interfaces that add different behaviours to items, like running some code when the item is used.
+
+Here, we need to implement the [PylonItemEntityInteractor] interface. This interface has one method: `onUsedToRightClickEntity`.
+
+!!! note You can find a full list of item interfaces [here](https://pylonmc.github.io/pylon-core/docs/javadoc/io/github/pylonmc/pylon/core/item/base/package-summary.html).
 
 === "Java"
     ```java title="BaguetteFlamethrower" hl_lines="6-9"

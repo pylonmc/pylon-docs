@@ -1,6 +1,4 @@
-# The full code
-
-There's been a lot to go through, but when you look at the code we needed, it's actually really not too much:
+# Full code
 
 === "Java"
     ```java title='MyAddon.java'
@@ -20,6 +18,8 @@ There's been a lot to go through, but when you look at the code we needed, it's 
     PylonItem.register<PylonItem>(baguette)
     BasePages.FOOD.addItem(baguetteKey)
     ```
+
+<span></span>
 
 ```yaml title='en.yml'
 addon: "<your addon name here>"

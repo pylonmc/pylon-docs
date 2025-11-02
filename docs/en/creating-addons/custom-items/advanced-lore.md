@@ -1,16 +1,8 @@
 # Advanced lore
 
-## Overview
-
-Let's have a look at some of the other things we can do with item lore. Right now, it's very boring:
-
-![Boring baguette flamethrower lore](img/boring-baguette-flamethrower.png)
-
----
-
 ## Minimessage
 
-Lore isn't just plain text - there are **tags** like `<arrow>` and `<red>` and `<bold>`. These tags are added by [MiniMessage](https://docs.advntr.dev/minimessage/index.html). 
+Lore can contain **tags** like `<arrow>` and `<red>` and `<bold>`. These tags are added by [MiniMessage](https://docs.advntr.dev/minimessage/index.html). 
 
 !!! info "You can find a full list of MiniMessage tags [here](https://docs.advntr.dev/minimessage/format.html)."
 
@@ -69,7 +61,7 @@ baguette_flamethrower:
 
 ## Pylon's custom tags
 
-The fun doesn't end there - Pylon adds its own MiniMessage tags! You've already met the `<arrow>` tag added by Pylon, which is used all over the place. There are two other very important tags that Pylon adds: `<insn>` (instruction) and `<attr>` (attribute).
+The fun doesn't end there - Pylon adds its own MiniMessage tags! You've already met the `<arrow>` tag added by Pylon. There are two other very important tags that Pylon adds: `<insn>` (instruction) and `<attr>` (attribute).
 
 !!! info "You can find a full list of Pylon's custom tags [here](TODO)."
 
@@ -101,7 +93,7 @@ baguette_flamethrower:
 ```
 
 !!! success "Best practice"
-    Put description first, then instructions, then attributes. This helps keep things consistent across all of Pylon's items.
+    Put description first, then instructions, then attributes, as shown in the above example. This helps keep things consistent across all of Pylon's items.
 
 ![formatting](img/attribute.png)
 
@@ -120,7 +112,7 @@ The `PylonItem` class has a method called `getPlaceholders`. This method - when 
 === "Java"
     ```java title="BaguetteFlamethrower.java" hl_lines="13-18"
     public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
-        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
+        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", ConfigAdapter.INT);
     
         public BaguetteFlamethrower(@NotNull ItemStack stack) {
             super(stack);
@@ -142,7 +134,7 @@ The `PylonItem` class has a method called `getPlaceholders`. This method - when 
 === "Kotlin"
     ```kotlin title="BaguetteFlamethrower.kt" hl_lines="8-9"
     class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack), PylonItemEntityInteractor {
-        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", Int::class.java)
+        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", ConfigAdapter.INT)
     
         override fun onUsedToRightClickEntity(event: PlayerInteractEntityEvent) {
             event.rightClicked.fireTicks = burnTimeTicks
@@ -170,12 +162,12 @@ baguette_flamethrower:
 
 ### Units
 
-One final thing. We're currently manually adding 'seconds' - but Pylon has a units API we can use. This API can automatically choose how to format the unit. It's very simple to use:
+In the example above, we're manually adding 'seconds' - but Pylon has a units API we can use. This API can automatically choose how to format the unit. It's very simple to use:
 
 === "Java"
     ```java title="BaguetteFlamethrower.java" hl_lines="16"
     public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
-        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
+        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", ConfigAdapter.INT);
     
         public BaguetteFlamethrower(@NotNull ItemStack stack) {
             super(stack);
@@ -197,7 +189,7 @@ One final thing. We're currently manually adding 'seconds' - but Pylon has a uni
 === "Kotlin"
     ```kotlin title="BaguetteFlamethrower.kt" hl_lines="9"
     class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack), PylonItemEntityInteractor {
-        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", Int::class.java)
+        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", ConfigAdapter.INT)
 
         override fun onUsedToRightClickEntity(event: PlayerInteractEntityEvent) {
             event.rightClicked.fireTicks = burnTimeTicks
@@ -222,4 +214,4 @@ baguette_flamethrower:
 !!! info "You can find a full list of Pylon's default units [here](https://pylonmc.github.io/pylon-core/docs/javadoc/io/github/pylonmc/pylon/core/util/gui/unit/UnitFormat.html)."
 
 !!! success "Best practice"
-    **Use units instead of hardcoding values**, even when it's a simple unit. This means the same unit looks the same across all items, and all values are formatted in the same way. For example, if we hardcoded placeholders, we might end up with '2.0' in some places and '2' in some places depending on whether we use a `float` or `int` - but using the unit API ensures it's always the same.
+    **Use the unit system instead of hardcoding in units**. This means the same unit looks the same across all items, and all values are formatted in the same way.

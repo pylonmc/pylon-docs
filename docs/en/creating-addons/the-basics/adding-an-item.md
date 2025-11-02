@@ -2,7 +2,7 @@
 
 ## Overview
 
-Our addon so far has only one class: `MyAddon` (or whatever you renamed it to). This class extends [JavaPlugin] and implements [PylonAddon]. There are some comments inside the class to explain what each part does - have a read through and try to understand how it works. Our addon doesn't actually do anything yet though - so let's add a new item!
+The template addon has only one class: `MyAddon` (or whatever you renamed it to). This class extends [JavaPlugin] and implements [PylonAddon]. There are some comments inside the class to explain what each part does - have a read through and try to understand how it works. Our addon doesn't actually do anything yet though - so let's add a new item!
 
 Let's create a baguette, which fills 6 hunger bars, to start with.
 

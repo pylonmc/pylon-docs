@@ -10,7 +10,7 @@ Pylon Base is written in Java.
 2. If you're using IntelliJ, it'll set everything up automatically. If not, run `./gradlew`. This will clone the `pylon-core` and `pylon-base` repositories.
 3. If you want to submit your changes to the Pylon project, **delete the `pylon-core` or `pylon-base` directory (depending on which one you want to contribute to), fork the pylon-core or pylon-base repository, and clone your fork into the same directory.** Otherwise, you won't be able to open a pull request with your changes (unless you're a Pylon developer and have access to the Pylon repositories).
 
-See the [Pylon Master Project](./master-project) page for more information about the master repository.
+See the [Pylon Master Project](master-project.md) page for more information about the master repository.
 
 ## Submitting your contributions
 

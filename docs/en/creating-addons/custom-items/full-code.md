@@ -19,12 +19,12 @@
     BasePages.FOOD.addItem(baguetteFlamethrowerKey)
     ```
 
-[](tab break)
+<span></span>
 
 === "Java"
     ```java title="BaguetteFlamethrower.java"
     public class BaguetteFlamethrower extends PylonItem implements PylonItemEntityInteractor {
-        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", Integer.class);
+        private final int burnTimeTicks = getSettings().getOrThrow("burn-time-ticks", ConfigAdapter.INT);
     
         public BaguetteFlamethrower(@NotNull ItemStack stack) {
             super(stack);
@@ -46,7 +46,7 @@
 === "Kotlin"
     ```kotlin title="BaguetteFlamethrower.kt"
     class BaguetteFlamethrower(stack: ItemStack) : PylonItem(stack), PylonItemEntityInteractor {
-        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", Int::class.java)
+        private val burnTimeTicks = settings.getOrThrow("burn-time-ticks", ConfigAdapter.INT)
     
         override fun onUsedToRightClickEntity(event: PlayerInteractEntityEvent) {
             event.rightClicked.fireTicks = burnTimeTicks
@@ -54,8 +54,9 @@
     
         override fun getPlaceholders() =
             listOf(PylonArgument.of("burn-time", UnitFormat.SECONDS.format(burnTimeTicks / 20.0)))
-    }
-    ```
+    }```
+
+<span></span>
 
 ```yaml title="en.yml"
 baguette_flamethrower:
@@ -99,14 +100,14 @@ baguette_flamethrower:
     BasePages.FOOD.addItem(baguetteOfWisdomKey)
     ```
 
-[](tab break)
+<span></span>
 
 === "Java"
     ```java title="BaguetteOfWisdom.java"
     public class BaguetteOfWisdom extends PylonItem implements PylonInteractor {
         public static final NamespacedKey STORED_XP_KEY = new NamespacedKey(MyAddon.getInstance(), "stored_xp");
     
-        private final int xpCapacity = getSettings().getOrThrow("xp-capacity", Integer.class);
+        private final int xpCapacity = getSettings().getOrThrow("xp-capacity", ConfigAdapter.INT);
     
         public BaguetteOfWisdom(@NotNull ItemStack stack) {
             super(stack);
@@ -170,7 +171,7 @@ baguette_flamethrower:
             val STORED_XP_KEY = NamespacedKey(MyAddon.getInstance(), "stored_xp")
         }
 
-        private val xpCapacity = settings.getOrThrow("xp-capacity", Int::class.java)
+        private val xpCapacity = settings.getOrThrow("xp-capacity", ConfigAdapter.INT)
 
         override fun getPlaceholders() =
             listOf(
@@ -218,8 +219,9 @@ baguette_flamethrower:
                     )
                 }
             }
-    }
-    ```
+    }```
+
+<span></span>
 
 ```yaml title="en.yml"
 item:
