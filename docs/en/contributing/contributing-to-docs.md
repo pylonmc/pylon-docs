@@ -1,7 +1,7 @@
 # Contributing to documentation
 
 You would like to contribute to the documentation site? Great!  
-We use [MkDocs](https://www.mkdocs.org/) and [Github pages](https://pages.github.com/) for the documentation site you're reading right now.
+We use [MkDocs](https://www.mkdocs.org/) and [GitHub pages](https://pages.github.com/) for the documentation site you're reading right now.
 
 Here is a step-by-step guide on how to create/edit pages.
 
@@ -45,7 +45,7 @@ If Python is not installed, you can download it from the [official Python downlo
 !!! note "For Windows users"
     During installation, make sure to check the box that says "Add Python to PATH" if the installer offers such an option (it's usually off by default).
 
-    ![Add Python to PATH](./img/python-windows-path.png)
+    ![Add Python to PATH](img/python-windows-path.png)
 
 ### Text Editor (Optional)
 
@@ -73,7 +73,7 @@ We recommend [Visual Studio Code (VS Code)](https://code.visualstudio.com/), a f
 Now head over to the [pylon-docs repository](https://github.com/pylonmc/pylon-docs).  
 Click the "Fork" button in the top-right corner of the page to create your own copy of the repository.
 
-![GitHub Fork](./img/github-fork.png)
+![GitHub Fork](img/github-fork.png)
 
 ## Step 2: Cloning your fork
 
@@ -81,7 +81,7 @@ You will need to clone your forked repository to your local machine to be able t
 
 First, go to your forked repository on GitHub, click on the green "Code" button, and copy the URL under "HTTPS".
 
-![GitHub Clone URL](./img/github-clone.png)
+![GitHub Clone URL](img/github-clone.png)
 
 Open your terminal and run the following command (replace `<CLONE_URL_HERE>` with the URL you just copied):
 
@@ -188,17 +188,17 @@ If the `img/` folder doesn't exist in that directory, create it first.
 To embed an image in your markdown file, use the following syntax:
 
 ```markdown
-![Image description](./img/your-image-name.png)
+![Image description](img/your-image-name.png)
 ```
 
 - Replace `Image description` with a short description of what the image shows
 - Replace `your-image-name.png` with your actual filename
-- The `./img/` path is relative to your current markdown file
+- The `img/` path is relative to your current markdown file
 
 **Example:**
 
 ```markdown
-![GitHub Fork button](./img/github-fork.png)
+![GitHub Fork button](img/github-fork.png)
 ```
 
 ## Step 5: Previewing your changes
@@ -236,9 +236,9 @@ Once you pushed your changes to your fork on GitHub, you can create a pull reque
 
 1. Go to your forked repository on GitHub. You can always find your fork on GitHub's dashboard or your profile page.
 2. Click on the "Pull requests" tab.  
-![GitHub Pull Requests Tab](./img/github-pull-requests.png)
+![GitHub Pull Requests Tab](img/github-pull-requests.png)
 3. Click on the green "New pull request" button.
-4. Fill the title and description for your pull request.
+4. Fill in the title and description for your pull request.
 5. Click "Create pull request".
 
 That's it! Your changes will be reviewed by the maintainers. If everything looks good, your contribution will be merged. 🎉
