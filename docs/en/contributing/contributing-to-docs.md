@@ -34,9 +34,9 @@ MkDocs requires a recent version of [Python](https://www.python.org/), and the p
 You can check if you already have these installed from the command line:
 
 ```bash
-$ python --version
+$ python3 --version
 Python 3.13.3
-$ pip --version
+$ pip3 --version
 pip 25.2
 ```
 
@@ -46,27 +46,6 @@ If Python is not installed, you can download it from the [official Python downlo
     During installation, make sure to check the box that says "Add Python to PATH" if the installer offers such an option (it's usually off by default).
 
     ![Add Python to PATH](img/python-windows-path.png)
-
-### Text Editor (Optional)
-
-While you can edit Markdown files with any text editor, we recommend using a code editor for a better experience.
-
-We recommend [Visual Studio Code (VS Code)](https://code.visualstudio.com/), a free and powerful code editor that works on Windows, macOS, and Linux.
-
-**Why VS Code?**
-
-- Built-in Markdown preview
-- Git integration
-- Syntax highlighting
-- Extensions for enhanced Markdown editing
-- File explorer for easy navigation
-
-**Other alternatives:**
-
-- [Sublime Text](https://www.sublimetext.com/)
-- [Atom](https://atom-editor.cc/)
-- [Notepad++](https://notepad-plus-plus.org/) (Windows only)
-- Any text editor you're comfortable with
 
 ## Step 1: Forking the repository
 
