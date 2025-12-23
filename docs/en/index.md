@@ -1,10 +1,33 @@
-Pylon is an **upcoming** Minecraft Java plugin that will hugely expand vanilla gameplay with new content, including electric machines, huge multiblocks, a fully-fledged fluid system, a complex smelting system, extensive automation options and much, a research system, and much more. It is intended to supersede Slimefun.
+Pylon is an upcoming Minecraft Java technology plugin that will hugely expand vanilla gameplay with new content: electricity, diesel machines, new fluids and fluid pipes, logistics, and much, much more!
 
-Pylon uses an addon system, meaning anyone can add content to Pylon by writing an addon for it! It also comes with a number of really useful features, such as:
+## :wrench: Features
 
-- First-class translation support, meaning each player can select their own language.
-- Extensive configuration options, including per-machine configuration.
-- An intuitive and user-friendly guide to help players figure out the plugin.
+- :white_check_mark: Manual machines (mixing pot, grindstone, magic altar, hammer, and much more!)
+- :white_check_mark: Hydraulic machines (early-game automation)
+- :white_check_mark: Fluid pipes & new fluids
+- :white_check_mark: Smelting & alloying system
+- :white_check_mark: Multiblocks
+- :white_check_mark: Research system (unlock new items with research points)
+- :white_check_mark: Per-player language support
+- :white_check_mark: Comprehensive and user-friendly in-game guide
+- :white_check_mark: Extensive server customisation options (including per-machine settings and customisable recipes)
+- :white_check_mark: First-class addon support (even all of Pylon's base content is added using an addon!)
+- :construction: Performance tuning options (limit the number of blocks per chunk/player, configure tick rates, etc)
+- :construction: First-class texture pack support + 'official' texture pack (including blocks)
+- :construction: Diesel machines (mid-game automation)
+- :construction: Cargo system (automatically move items from A to B)
+- :o: Electric machines (end-game automation)
+- :o: AE2-style endgame logistics system
+- :o: Builtin profiler for determining what's causing the most lag
+- :o: Bedrock support (via Geyser)
+
+## :calendar: Provisional timeline
+
+- **December 2025** - Most/all diesel machines fully implemented
+- **January 2025** - Cargo system fully implemented
+- **February 2025** - Open alpha testing (likely hosted on MetaMechanists - my own server) begins. We will most likely run several seasons of Pylon that each last a few weeks, to iron out bugs, test performance, improve stability and UX, and make sure the plugin is ready to be released.
+- **April 2025** - Electricity fully implemented
+- **Mid 2026** - Pylon officially released
 
 ## :frame_photo: Pylon in pictures (so far)
 
@@ -21,59 +44,97 @@ Pylon uses an addon system, meaning anyone can add content to Pylon by writing a
 ![Using the magic altar](img/using-magic-altar.png)
 ![Using the smeltery](img/using-smeltery.png)
 
-## :stopwatch: Performance & stability
+## :link: Links
 
-We have built Pylon with performance and stability in mind from day 1:
+- Discord invite: [https://discord.gg/4tMAnBAacW](https://discord.gg/4tMAnBAacW)
+- Github: [https://github.com/pylonmc](https://github.com/pylonmc)
 
-- Pylon makes **extensive** use of caching and will run most performance-intensive systems asynchronously, as well as makeing use of modern concurrency/performance features such as coroutines.
-- In addition, the plugin will have a broad range of config options to help performance - including per-machine tick rates, the ability to limit the number of machines placed by player/chunk/etc, the tick rate of fluid/energy/etc, and more.
-- The way Pylon is designed minimises the chance of data corruption and has a range of error-handling mechanisms if something does go wrong.
-Note: Pylon will likely not be fully compatible with bedrock.
+## :tools: For server admins
 
-## :calendar: Provisional timeline
+### Performance
 
-**September/October 2025** - Invite-only alpha testing begins.
+- :gear: Even huge multiblocks will have **almost zero** performance impact compared to a normal Pylon block
+- :gear: Most of Pylon will eventually run asynchronously
+- :gear: Performance is literally built into Pylon's design - systems like fluid pipes and cargo were designed from the ground up in the most performant way possible
+- :gear: You will be able to limit the number of each type of block per player or per chunk
+- :gear: Pylon will have many more performance options, such as making fluid pipes tick less often, or reducing tick rates of individual types of machines
+- :gear: We plan to add a purpose-built profiler so you can see exactly what blocks & items are using the most CPU or memory
 
-**Novemeber/December 2025** - Open alpha testing (likely hosted on MetaMechanists - my own server) begins. We will most likely run several seasons of Pylon that each last a few weeks, to iron out bugs, test performance, improve stability and UX, and make sure the plugin is ready to be released.
+### Stability
 
-**Early/mid 2026** - Pylon is officially released
+- :gear: Easily disable any problematic blocks or items
+- :gear: Pylon will refuse to start if it detects any configuration issues
+- :gear: Blocks that throw errors will be safely unloaded
+- :gear: Removing addons is safe, with all the data kept intact and restored if the addon is re-added
+- :gear: Pylon data is stored **in the world data itself** - no need to keep extra backups
 
-## :keyboard: Developing Pylon addons
+### Customisation
 
-We've gone to great lengths to make Pylon easy, intuitive, flexible, and most importantly, fun to develop addons for. A lot of painful lessons learnt from hundreds of hours of Slimefun addon development have guided Pylon's API, and the result is something that's intuitive and easy to work with, while being very flexible. Pylon also fully supports addons written in Kotlin, which is much nicer to write than Java.
+- :gear: The unlocks and costs of each research are configurable
+- :gear: All recipes are configurable
+- :gear: Most blocks and items have settings determining their tick rate, speed, diesel usage, etc
 
-Currently, addon development is not supported due to how rapidly Pylon is still changing, and the lack of high-level documentation on how to do it. We plan to soon have a detailed guide on how to create an addon and how to take advantages of all the systems Pylon has to offer, so watch this space!
+## :keyboard: For developers
 
-## :link: Clicky things
+### Addon development
 
-Discord invite: [https://discord.gg/4tMAnBAacW](https://discord.gg/4tMAnBAacW)
+- :gear: Pylon has first-class addon support; all the base content is added using an addon!
+- :gear: Pylon supports addons written in Kotlin
+- :gear: Blocks, items, recipes, guide pages, fluids, and entities are all easy and intuitive to add
+- :gear: Pylon will have extensive high-level documentation on all the features it has to offer
 
-Github: [https://github.com/pylonmc](https://github.com/pylonmc)
+:warning: Currently, addon development is not supported due to how rapidly Pylon is still changing.
 
-Documentation **(heavy work in progress):** [https://pylonmc.github.io/](https://pylonmc.github.io/)
+### Examples
+
+See the following code to get a feel for how Pylon works:
+
+- :link: Portable dustbin: [https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/content/tools/PortableDustbin.java](https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/content/tools/PortableDustbin.java)
+- :link: Fireproof rune: [https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/content/tools/FireproofRune.java](https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/content/tools/FireproofRune.java)
+- :link: Hammer recipe type: [https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/recipes/HammerRecipe.java](https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/recipes/HammerRecipe.java)
+- :link: Hammer recipe files: [https://github.com/pylonmc/pylon-base/blob/master/src/main/resources/recipes/pylonbase/hammer.yml](https://github.com/pylonmc/pylon-base/blob/master/src/main/resources/recipes/pylonbase/hammer.yml)
+- :link: Base English language file: [https://github.com/pylonmc/pylon-base/blob/master/src/main/resources/lang/en.yml](https://github.com/pylonmc/pylon-base/blob/master/src/main/resources/lang/en.yml)
+- :link: Press block: [https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/content/machines/simple/Press.java](https://github.com/pylonmc/pylon-base/blob/master/src/main/java/io/github/pylonmc/pylon/base/content/machines/simple/Press.java)
+- :link: Hydraulic excavator settings: [https://github.com/pylonmc/pylon-base/blob/master/src/main/resources/settings/hydraulic_excavator.yml](https://github.com/pylonmc/pylon-base/blob/master/src/main/resources/settings/hydraulic_excavator.yml)
+
 
 ## :detective: The team
 
-Currently, the core team developing Pylon is:
+### Lead developers
 
-@ohmvir :flag_ca: - a relatively fresh but enthusiastic face from MetaMechanists who's new to plugin development, but has done a fantastic job getting up to speed and adding lots of base content, like the health talismans and beheading sword, as well as tackling various tasks that need doing here and there.
+@seggan :flag_us: - a veteran Slimefun addon developer (SlimefunWarfare, SFCalc, Galactifun), with a impressive contribution record for SF addons, Paper, and Slimefun. Seggan is responsible for many core Pylon systems, including translation, WAILA, researches, the smeltery, the recipe system, and more.
+@ohmvir :flag_ca: - new to plugin development, but has done a fantastic job getting up to speed and adding lots of base content, like talismans and the beheading sword, as well as a *lot* of various smaller technical changes & bug fixes.
+@overlordidra (me!) :flag_gb: - owner of a Slimefun server for 5 years & Quaptics developer. I have developed many of the core systems including the Pylon guide, fluid system, hydraulics, cargo, diesel, automated tests, block storage, and more.
 
-@overlordidra :flag_gb: - owner of MetaMechanists (a popular Slimefun server) for over 4 years and the developer behind Quaptics. Many of the core systems - most notably the Pylon guide, the fluid system, hydraulics, the automated test code, and the core systems that keep track of custom blocks/entities/items, are his doing.
+### Artists
+@pandicka :flag_cz: - a talented texture pack artist who worked on Slimefun texture packs, and has created the majority of the Pylon resource pack.
 
-@seggan :flag_us: - a veteran Slimefun addon developer behind SlimefunWarfare, SFCalc, and the very successful Galactifun addon, with a very impressive contribution record for other addons, the Paper server software, and Slimefun itself. Seggan is responsible for many of the core Pylon systems, including most notably the entire translation system, WAILA, the research system, the internal registry system, and the recipe system (and has done lots more smaller features!).
+### Developers
+@vaan1310 :flag_it: - previously headed a geopolitics server and has been doing a lot of valuable work on the 'smaller stuff' - resolving issues, fixing bugs, adding polishing, making technical changes, and lots more.
+@justahuman_xd :flag_us: - head developer on my server for 3 years and works professionally in the Minecraft space. He has done the majority of the texture pack support side of Pylon, and other various smaller refinements.
+@tinalness :flag_cn: - former Slimefun addon developer (JustEnoughGuide, SlimefunTimeIt, MSUA, AdvancedBan, and more) who has contributed to Pylon (primarily the recipe ingredient calculation system) and also has already written two addons.
+@ihateblueb :flag_us: - has run a Slimefun server (Orchid) for several years and has added some neat content like the elevator.
 
-We also have help from:
+**Interested in helping out? Ask us on [Discord](https://discord.gg/4tMAnBAacW) and we can find you some issues to get started.**
 
-@ihateblueb who has run a Slimefun server (Orchid) and is helping us add more content (the elevator is her doing!).
+## :question: Q&A
 
-@justahuman_xd who is responsible for many of the more hacky things we do, namely the block and armor texture systems. He also has a *lot* of Slimefun development experience under his belt and has given a lot of useful input and guidance on the project.
+Q: **How do I install Pylon?**
+Read the installation guide at [https://pylonmc.github.io/installation/installing-pylon/](https://pylonmc.github.io/installation/installing-pylon/). Beware that **Pylon is still experimental and you should not run it outside of an expendable test server.**
 
-@.ph.enix who used to manage all our CI - he set up automatic testing on our pull requests, and set up the system to publish new versions of Pylon. Unfortunately, he has left the project, but we are very grateful for all his help!
+Q: **Will Pylon support Slimefun addons?**
+No. Migrating from Slimefun to Pylon is non-trivial, and we advise addon developers to rewrite their addons entirely to better suit Pylon's progression and style rather than attempting to migrate them 1-to-1.
 
-@vaan1310 who has implemented quite a few bits here and there, such as bug fixes and data-driven researches, as well as helping out with pull request reviews.
+Q: **What versions will Pylon support?**
+We plan to keep each Pylon version compatible with the latest version of Minecraft at the time. To make it easier and faster for us to update, **each version of Pylon will only support one version of Minecraft.** This means you will need to use older versions of Pylon for older versions of Minecraft. Critical fixes will be backported.
 
-If you're interested in helping out, drop us a message on our Discord server! You don't have to be an expert to help, a little plugin development experience is enough - there are plenty of tasks to do, ranging from trivial to exceptionally complex, so just let us know if you're interested and we can find something for you to do.
+Q: **What server software can Pylon run on?**
+Paper or paper forks only. Folia support may come later down the line.
 
-## :question: Got questions?
+Q: **Will Pylon support bedrock (via Geyser)?**
+Eventually, yes, but it is not a high priority and will be one of the last things added. Geyser is very hard for a project like this to support and there will be some jank.
 
-Drop a message on our Discord server and we'll be happy to answer.
+Q: **When will Pylon be ready?**
+See the 'Provisional Timeline' section above
+
+**If you have a different question, drop a message on [Discord](https://discord.gg/4tMAnBAacW) and we'll be happy to answer.**
