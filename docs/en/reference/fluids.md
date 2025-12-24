@@ -1,7 +1,7 @@
 # Fluids
 
-!!! abstract "Trying to create a block that consumes or produces fluids?"
-    See the 'Fluid blocks' tutorial. This is a technical description of how fluids work.
+`AUTHOR: Idra`
+`HAS CONTEXT: Idra`
 
 ## Fluid points
 

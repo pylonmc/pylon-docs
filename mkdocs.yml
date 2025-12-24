@@ -55,6 +55,7 @@ nav:
       - Practice tasks: creating-addons/custom-items/practice-tasks.md
   - Reference:
     - Fluids: reference/fluids.md
+    - Cargo: reference/cargo.md
   - Javadocs: javadocs.md
   - Contributing:
     - Getting started: contributing/getting-started.md
