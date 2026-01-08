@@ -57,6 +57,7 @@ nav:
     - Data-oriented interfaces: reference/data-oriented-interfaces.md
     - Fluids: reference/fluids.md
     - Cargo: reference/cargo.md
+    - Internationalization: reference/i18n.md
   - Javadocs: javadocs.md
   - Contributing:
     - Getting started: contributing/getting-started.md
