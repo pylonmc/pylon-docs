@@ -1,6 +1,6 @@
 Pylon is an upcoming Minecraft Java technology plugin that will hugely expand vanilla gameplay with new content: electricity, diesel machines, new fluids and fluid pipes, logistics, and much, much more!
 
-[:simple-discord: Join us on Discord :material-arrow-right:](https://discord.gg/4tMAnBAacW){ .md-button } [:simple-github: Find us on GitHub :material-arrow-right:](https://github.com/pylonmc){ .md-button } [:material-server: Install Pylon :material-arrow-right:](https://github.com/pylonmc){ .md-button }
+[:simple-discord: Join us on Discord :material-arrow-right:](https://discord.gg/4tMAnBAacW){ .md-button } [:simple-github: Find us on GitHub :material-arrow-right:](https://github.com/pylonmc){ .md-button } [:material-server: Install Pylon :material-arrow-right:](home/installing-pylon.md){ .md-button }
 
 Keep reading to find out more.
 
