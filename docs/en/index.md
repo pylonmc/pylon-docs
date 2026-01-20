@@ -129,5 +129,6 @@ See the following code to get a feel for how Pylon works:
 | **What server software can Pylon run on?** | Paper or paper forks only. Folia support may come later down the line. |
 | **Will Pylon support bedrock (via Geyser)?** | Eventually, yes, but it is not a high priority and will be one of the last things added. Geyser is very hard for a project like this to support and there will be some jank. |
 | **When will Pylon be ready?** | See the 'Provisional Timeline' section above |
+| **How can I submit a translation?** | We do not currently accept translations due to how quickly the plugin is changing (any translation would go out of date quickly). There will be an announcement when we are ready for translations. |
 
 **If you have a different question, drop a message on [Discord](https://discord.gg/4tMAnBAacW) and we'll be happy to answer.**
